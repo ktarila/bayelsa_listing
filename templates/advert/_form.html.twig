@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+<div>
+    <h3 class="tracking-wide font-semibold text-2xl my-3 text-gray-800 dark:text-indigo-100">Personal Info </h3>
+    <div class="grid grid-cols-6 gap-4 mb-7">
+        <div class="col-span-6">
+            {{ form_row(form.fullname) }}
+        </div>
+        <div class="col-span-3">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="col-span-3">
+            {{ form_row(form.phone) }}
+        </div>
+    </div>
+    <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-gray-100">Advert Info </h3>
+    <div class="grid-cols-1 gap-4 mb-7">
+        <div class="col-span-1 mb-2">
+            {{ form_row(form.category) }}
+        </div>
+        <div class="col-span-1 mb-2">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col-span-1 mb-2">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+    <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-gray-100">Address</h3>
+    <div class="grid grid-cols-6 gap-4 mb-3">
+        <div class="col-span-3 mb-2">
+            {{ form_row(form.state) }}
+        </div>
+        <div class="col-span-3 mb-2">
+            {{ form_row(form.lga) }}
+        </div>
+    </div>
+    {{ form_widget(form) }}
+</div>
+<div class="px-4 py-3 text-right sm:px-6">
+    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 dark:bg-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        {{ button_label|default('Save') }}
+    </button>
+</div>
+{{ form_end(form) }}

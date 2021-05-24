@@ -1,0 +1,103 @@
+{% use 'form_div_layout.html.twig' %}
+
+{%- block widget_container_attributes -%}
+    {%- set attr = attr|merge({ class: attr.class|default(block('row_class')) }) -%}
+    {{- parent() -}}
+{%- endblock widget_container_attributes -%}
+
+{% block row_class %}space-y-6{% endblock row_class %}
+
+{%- block widget_attributes -%}
+    {%- set attr = attr|merge({ class: attr.class|default(block('widget_class')) ~ (disabled ? ' ' ~ block('widget_disabled_class')) ~ (errors|length ? ' ' ~ block('widget_errors_class')) }) -%}
+    {{- parent() -}}
+{%- endblock widget_attributes -%}
+
+{% block widget_class %}mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs rounded bg-gray-50 border-gray-300 focus:border-indigo-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-400{% endblock widget_class %}
+
+{% block widget_disabled_class %}border-gray-300 text-gray-500{% endblock widget_disabled_class %}
+
+{% block widget_errors_class %}border-red-700{% endblock widget_errors_class %}
+
+{%- block form_label -%}
+    {%- set label_attr = label_attr|merge({ class: label_attr.class|default(block('label_class')) }) -%}
+    {{- parent() -}}
+{%- endblock form_label -%}
+
+{% block label_class %}text-sm font-bold text-gray-700 dark:text-gray-100 tracking-wide{% endblock label_class %}
+
+{% block label_errors_class %}border-red-700{% endblock label_errors_class %}
+
+{%- block form_help -%}
+    {%- set help_attr = help_attr|merge({ class: help_attr.class|default(block('help_class')) }) -%}
+    {{- parent() -}}
+{%- endblock form_help -%}
+
+{% block help_class %}mt-1 text-gray-600 text-sm italic dark:text-gray-100{% endblock help_class %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li class="text-red-700">{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice.attr %}{% with { attr: choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if not render_preferred_choices|default(false) and choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                {{- block('choice_option_label') -}}
+            </option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options -%}
+
+{%- block choice_option_label -%}
+    {# this block has been called from choice_widget_options block #}
+
+    {%- if raw_label|default(false) -%}
+        {# the label is rendered as raw when IconChoiceType is used #}
+        {{ choice_translation_domain is same as(false) ? choice.label|raw : choice.label|trans({}, choice_translation_domain)|raw }}
+    {%- else -%}
+        {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+    {%- endif -%}
+{%- endblock -%}
+
+{%- block choice_widget_expanded -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mt-2') }) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="flex items-center space-x-2">
+                {{- form_widget(child, { attr: { class: 'mt-0' } }) -}}
+                {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{%- block checkbox_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_errors(form) -}}
+        <div class="inline-flex items-center">
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_label(form) -}}
+        </div>
+        {{- form_help(form) -}}
+    </div>
+{%- endblock checkbox_row -%}
+
+{%- block checkbox_widget -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mr-2') }) -%}
+    {{- parent() -}}
+{%- endblock checkbox_widget -%}

@@ -4,3 +4,7 @@
 
 @import "tailwindcss/utilities";
 
+label.required:after {
+    content: "*";
+}
+

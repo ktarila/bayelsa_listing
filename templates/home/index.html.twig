@@ -1,96 +1,7 @@
 {% extends 'base.html.twig' %}
-{% block title %}Bayelsa Listing{% endblock %}
+{% block title %}Buyers N Sellers{% endblock %}
 {% block body %}
 <div>
-    {# <div class="grid grid-cols-3 gap-4 mt-5">
-        <div class="col-span-3 lg:col-span-1  shadow rounded-lg p-10 bg-indigo-700 text-gray-100 dark:text-white dark:bg-gray-600 flex-auto items-center border border-indigo-500 dark:border-gray-500 cursor-pointer hover:shadow-lg">
-            <div class="flex flex-wrap">
-                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                    <h5 class="text-4xl font-bold leading-none mb-5">
-                        I am ....
-                    </h5>
-                    <span class="mt-5 leading-none block">
-                        Find skilled and unskilled workers
-                    </span>
-                </div>
-                <div class="relative w-auto flex-initial">
-                    <div class="text-white p-3 text-center inline-flex items-center justify-center w-24 h-24 rounded-full text-indigo-600 bg-indigo-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <p class="flex items-center text-md  mt-4">
-                <span class="text-white mr-2 font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                    </svg>
-                </span>
-                <span class="whitespace-nowrap">
-                    View adverts
-                </span>
-            </p>
-        </div>
-        <div class="col-span-3 lg:col-span-1 shadow rounded-lg p-10 bg-yellow-600 text-gray-100 dark:text-white dark:bg-gray-600 flex-auto items-center border border-yellow-500 dark:border-gray-500 cursor-pointer hover:shadow-lg">
-            <div class="flex flex-wrap">
-                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                    <h5 class="text-4xl font-bold leading-none mb-5">
-                        I have ....
-                    </h5>
-                    <span class="mt-5 leading-none block">
-                        Find items for sale
-                    </span>
-                </div>
-                <div class="relative w-auto flex-initial">
-                    <div class="text-white p-3 text-center inline-flex items-center justify-center w-24 h-24 rounded-full text-yellow-600 bg-yellow-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <p class="flex items-center text-md  mt-4">
-                <span class="text-white font-medium mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                    </svg>
-                </span>
-                <span class="whitespace-nowrap">
-                    View adverts
-                </span>
-            </p>
-        </div>
-        <div class="col-span-3 lg:col-span-1 shadow rounded-lg p-10 bg-green-700 text-gray-100 dark:text-white dark:bg-gray-600 flex-auto items-center border border-green-500 dark:border-gray-500 cursor-pointer hover:shadow-lg">
-            <div class="flex flex-wrap">
-                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                    <h5 class="text-4xl font-bold leading-none mb-5">
-                        I want ....
-                    </h5>
-                    <span class="mt-5 leading-none block">
-                        Find people looking for goods or services
-                    </span>
-                </div>
-                <div class="relative w-auto flex-initial">
-                    <div class="text-white p-3 text-center inline-flex items-center justify-center w-24 h-24 rounded-full text-green-600 bg-green-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <p class="flex items-center text-md  mt-4">
-                <span class="text-white font-medium mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                    </svg>
-                </span>
-                <span class="whitespace-nowrap">
-                    View adverts
-                </span>
-            </p>
-        </div>
-    </div> #}
     <div class="search">
         <div class="w-full pt-2 relative mx-auto">
             <input class="w-full border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-600 h-14 px-5 pr-16 rounded-lg focus:outline-none focus:border-gray-500 dark:text-white text-white text-lg dark:placeholder-gray-100" type="search" name="search" placeholder="Search">
@@ -193,18 +104,7 @@
         {% endfor %}
     </div>
     <div class="hidden lg:block right w-full md:w-1/5 mt-5 md:mt-2 ">
-        <div class="w-full bg-white dark:bg-gray-700 rounded shadow">
-            <div class="w-full">
-                <h3 class="text-xl text-gray-900 font-bold dark:text-gray-200 p-3">Tags</h3>
-                <ul class="flex w-full flex-wrap text-gray-800">
-                    {% for i in 0..10 %}
-                    <li class="px-5 cursor-pointer dark:text-gray-300 truncate border-t border-gray-100 dark:border-gray-600 p-3 w-full font-medium hover:bg-gray-500 hover:text-gray-300">
-                        #mechanic
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        {% include 'tag/tags.html.twig' %}
     </div>
 </div>
 <div id='myModalEmail' class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 z-30 left-0 flex items-center justify-center inset-0 overflow-y-auto">

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Advert{% endblock %}
+
+{% block body %}
+    <h1>Advert</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ advert.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ advert.title }}</td>
+            </tr>
+            <tr>
+                <th>Fullname</th>
+                <td>{{ advert.fullname }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ advert.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ advert.email }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ advert.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ advert.createdAt ? advert.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ advert.updatedAt ? advert.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Likes</th>
+                <td>{{ advert.likes }}</td>
+            </tr>
+            <tr>
+                <th>Unlikes</th>
+                <td>{{ advert.unlikes }}</td>
+            </tr>
+            <tr>
+                <th>Token</th>
+                <td>{{ advert.token }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ advert.active ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('advert_index') }}">back to list</a>
+
+    <a href="{{ path('advert_edit', {'id': advert.id}) }}">edit</a>
+
+    {{ include('advert/_delete_form.html.twig') }}
+{% endblock %}

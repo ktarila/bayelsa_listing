@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Advert index{% endblock %}
+
+{% block body %}
+    <h1>Advert index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Fullname</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>Likes</th>
+                <th>Unlikes</th>
+                <th>Token</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td>{{ advert.id }}</td>
+                <td>{{ advert.title }}</td>
+                <td>{{ advert.fullname }}</td>
+                <td>{{ advert.phone }}</td>
+                <td>{{ advert.email }}</td>
+                <td>{{ advert.description }}</td>
+                <td>{{ advert.createdAt ? advert.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ advert.updatedAt ? advert.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ advert.likes }}</td>
+                <td>{{ advert.unlikes }}</td>
+                <td>{{ advert.token }}</td>
+                <td>{{ advert.active ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('advert_show', {'id': advert.id}) }}">show</a>
+                    <a href="{{ path('advert_edit', {'id': advert.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('advert_new') }}">Create new</a>
+{% endblock %}
