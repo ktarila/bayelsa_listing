@@ -11,16 +11,19 @@ namespace App\Entity;
 
 use App\Repository\AdvertRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      */
     private $id;
 
@@ -57,20 +60,20 @@ class Advert
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $lastUpdated;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $likes;
+    private $likes = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $unlikes;
+    private $unlikes = 0;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
      */
     private $token;
 
@@ -97,7 +100,13 @@ class Advert
      */
     private $category;
 
-    public function getId(): ?int
+    public function __construct()
+    {
+        $now = new \DateTime();
+        $this->createdAt = $now;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -174,14 +183,19 @@ class Advert
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getLastUpdated(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->lastUpdated;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = $updatedAt;
+        $now = new \DateTime();
+        $this->lastUpdated = $now;
 
         return $this;
     }

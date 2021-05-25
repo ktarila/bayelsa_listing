@@ -8,3 +8,16 @@ label.required:after {
     content: "*";
 }
 
+/*allow clicakble events in svg */
+svg {
+    pointer-events: none;
+}
+
+a object{
+  pointer-events: none;
+}
+
+.no-pointer-event{
+    pointer-events: none;
+}
+
