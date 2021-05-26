@@ -61,6 +61,7 @@ module.exports = {
                 'print': { 'raw': 'print' },
             },
             colors: {
+                'regal-blue': '#243c5a',
                 'deep-orange': '#ff5722',
                 'deep-orange-50': '#fbe9e7',
                 'deep-orange-100': '#ffccbc',
