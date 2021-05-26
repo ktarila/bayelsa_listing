@@ -47,13 +47,13 @@
                         <a href="{{path('advert_show', {'id': advert.id})}}" class="w-5/6 font-medium mb-1 text-gray-900 dark:text-white text-xl md:text-2xl truncate">{{advert.title}}</a>
                         <div>
                             <div class="inline-block relative z-10">
-                                <a onclick="toggleDD('menu-links')" class="w-52 cursor-pointer drop-button text-gray-700 dark:text-gray-100 focus:outline-none text-xs md:text-sm inline-block flex items-center justify-end drop-button">
-                                    <span class="no-pointer-event flex bg-purple-800  text-gray-100 px-3 py-2 rounded font-semibold"> <span class="inline-block pr-2"> actions</span>
+                                <a onclick="toggleDD('menu-links_{{loop.index}}')" class="w-52 cursor-pointer drop-button text-gray-700 dark:text-gray-100 focus:outline-none text-xs md:text-sm inline-block flex items-center justify-end drop-button">
+                                    <span class="no-pointer-event flex bg-purple-600  text-gray-100 px-3 py-2 rounded font-semibold"> <span class="inline-block pr-2"> actions</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="border-l border-purple-400 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg> <span> </a>
                             </div>
-                            <div id="menu-links" role="menu" tabindex="0" class="dropdownlist invisible z-30 absolute w-52 mt-2 origin-top-right bg-white dark:bg-gray-800 dark:border-gray-700 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div id="menu-links_{{loop.index}}" role="menu" tabindex="0" class="dropdownlist invisible z-30 absolute w-52 mt-2 origin-top-right bg-white dark:bg-gray-800 dark:border-gray-700 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div class="px-1 py-1" role="none">
                                     <button class="focus:outline-none hover:bg-purple-800 hover:text-white text-gray-900 dark:text-gray-200 group flex rounded-md items-center w-full px-2 py-2 text-sm" role="menuitem" tabindex="-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-sm flex items-center mb-4 flex-wrap">
+                    <div class="text-sm font-light flex items-center mb-4 flex-wrap">
                         <div class="flex mr-5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
