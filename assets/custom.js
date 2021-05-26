@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     // on dom ready --- equivalent of jquery document ready
 
+    function hashtag(text) {
+        var repl = text.replace(/#(\w+)/g, '<a class="text-blue-600" href="/tag/#$1">#$1</a>');
+        return repl;
+    }
+
+    //  Hashtags to div
+    var containsTag = document.querySelectorAll('.has-tag');
+    for (var i = containsTag.length - 1; i >= 0; i--) {
+        let text = containsTag[i].innerHTML;
+        containsTag[i].innerHTML = hashtag(text);
+    }
+
     //  Modals
     var openmodal = document.querySelectorAll('.modal-open')
     for (var i = 0; i < openmodal.length; i++) {
