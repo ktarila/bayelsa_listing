@@ -84,4 +84,14 @@ class Tag
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
+    public function getNameWithoutPoundSign(): string
+    {
+        return str_replace('#', '', $this->name);
+    }
 }

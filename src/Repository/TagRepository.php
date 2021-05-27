@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of Bayelsa Listing Symfony Project.
+ *
+ * (c) Patrick Kenekayoro <Patrick.Kenekayoro@outlook.com>
+ * .
+ */
+
 namespace App\Repository;
 
 use App\Entity\Tag;
@@ -22,29 +29,23 @@ class TagRepository extends ServiceEntityRepository
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findRandomTags()
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(20)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Tag
+    public function findOneByName(string $value): ?Tag
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
+            ->andWhere('t.name = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

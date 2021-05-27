@@ -4,21 +4,21 @@
 <div class="content flex flex-wrap justify-between">
     <div class="left md:w-3/4 w-full my-2 rounded-t">
         <div class="bg-white dark:bg-gray-600 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
-            <div class="page-title bg-regal-blue dark:bg-gray-700 w-full text-white p-5 rounded-t">
+            <div class="page-title bg-deep-orange-700 text-white dark:bg-gray-700 w-full text-white p-5 rounded-t">
                 <div class="w-full">
                     <div class="flex justify-between">
-                        <h2 class="w-5/6 text-xl font-bold leading-7 text-gray-100 dark:text-indigo-200 sm:text-3xl">
+                        <h2 class="w-5/6 text-xl font-bold leading-7 text-gray-100 sm:text-3xl">
                             {{ advert.title }}
                         </h2>
                         <div>
-                            <div class="inline-block relative z-10">
+                            <div class="inline-block relative">
                                 <a onclick="toggleDD('menu-links')" class="w-52 cursor-pointer drop-button text-gray-700 dark:text-gray-100 focus:outline-none text-xs md:text-sm inline-block flex items-center justify-end drop-button">
                                     <span class="no-pointer-event flex bg-deep-orange-800  text-gray-100 px-3 py-2 rounded font-semibold"> <span class="inline-block pr-2"> actions</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="border-l border-deep-orange-400 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg> <span> </a>
                             </div>
-                            <div id="menu-links" role="menu" tabindex="0" class="dropdownlist invisible z-30 absolute w-52 mt-2 origin-top-right bg-white dark:bg-gray-800 dark:border-gray-700 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div id="menu-links" role="menu" tabindex="0" class="dropdownlist invisible z-20 absolute w-52 mt-2 origin-top-right bg-white dark:bg-gray-800 dark:border-gray-700 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div class="px-1 py-1" role="none">
                                     <button class="focus:outline-none hover:bg-deep-orange-800 hover:text-white text-gray-900 dark:text-gray-200 group flex rounded-md items-center w-full px-2 py-2 text-sm" role="menuitem" tabindex="-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -89,7 +89,7 @@
                 <p class="has-tag">{{ advert.description|nl2br}}</p>
             </div>
         </div>
-        <div class="comments mt-5 shadow w-full rounded bg-white p-5">
+        <div class="comments mt-5 shadow w-full rounded bg-white dark:bg-gray-600 dark:text-gray-100 p-5">
             <h3 class="text-2xl font-semibold tracking-wide leading-relaxed">Comments</h3>
             <textarea rows="4" placeholder="Enter Comment" class="mt-1 w-full text-lg p-5 border-0 border-b-2 shadow-xs rounded bg-gray-50 border-gray-300 focus:border-indigo-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-400"></textarea>
             {% for i in 1 .. 10 %}
