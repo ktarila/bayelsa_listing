@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of Bayelsa Listing Symfony Project.
+ *
+ * (c) Patrick Kenekayoro <Patrick.Kenekayoro@outlook.com>
+ * .
+ */
+
 namespace App\Repository;
 
 use App\Entity\Advert;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +25,27 @@ class AdvertRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Advert::class);
+    }
+
+    public function advancedFilter($parameterArray = [])
+    {
+        $qb = $this->createQueryBuilder('d');
+        $qb->leftJoin('d.category', 'c')
+            ->addSelect('c')
+        ;
+
+        return $qb;
+    }
+
+    public function findByTag(Tag $tag)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.tags', 't')
+            ->andWhere('t.id = :tag_id')
+            ->setParameter('tag_id', $tag->getId())
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**

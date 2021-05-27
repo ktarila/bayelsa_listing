@@ -24,7 +24,7 @@ class TagController extends AbstractController
         $tag = $tagRepository->findOneByName("#{$tagname}");
         $adverts = [];
         if (null !== $tag) {
-            $adverts = $advertRepository->findAll();
+            $adverts = $advertRepository->findByTag($tag);
         }
 
         return $this->render('tag/by_tag.html.twig', [

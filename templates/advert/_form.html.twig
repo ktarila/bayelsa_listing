@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 <div>
-    <h3 class="tracking-wide font-semibold text-2xl my-3 text-gray-800 dark:text-indigo-100">Personal Info </h3>
+    <h3 class="tracking-wide font-semibold text-2xl my-3 text-gray-800 dark:text-deep-orange-100">Personal Info </h3>
     <div class="grid grid-cols-6 gap-4 mb-7">
         <div class="col-span-6">
             {{ form_row(form.fullname) }}
@@ -36,11 +36,11 @@
     {{ form_widget(form) }}
 </div>
 <div class="px-4 py-3 text-right sm:px-6">
-    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 dark:bg-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-deep-orange-600 dark:bg-deep-orange-800 hover:bg-deep-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-orange-500">
         {{ button_label|default('Save') }}
     </button>
     {% if advert.id is not null %}
-        <a href="{{ path('advert_show', {'id': advert.id})}}" class="inline-flex justify-center py-2 px-4 border border-deep-orange-800 shadow-sm text-sm font-medium rounded-md text-deep-orange-800 bg-white dark:bg-indigo-600 dark:border-transparent dark:text-gray-100 hover:bg-indigo-600 hover:text-gray-100 focus:outline-none focus:ring-0 border">
+        <a href="{{ path('advert_show', {'id': advert.id})}}" class="inline-flex justify-center py-2 px-4 border border-deep-orange-800 shadow-sm text-sm font-medium rounded-md text-deep-orange-800 bg-white dark:bg-deep-orange-600 dark:border-transparent dark:text-gray-100 hover:bg-deep-orange-600 hover:text-gray-100 focus:outline-none focus:ring-0 border">
         Cancel
     </a>
 

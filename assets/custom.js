@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     for (var i = all_links.length - 1; i >= 0; i--) {
         let anchor_el = all_links[i].getElementsByTagName('a');
         for (let el of anchor_el) {
-            if (el.href == window.location.href)
+            // exclude query parameters
+            if (el.href == window.location.href.split("?")[0])
             {
                 all_links[i].className += " bg-deep-orange-600 text-white";
             }
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 function hashtag(text) {
-    var repl = text.replace(/#(\w+)/g, '<a class="text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');
+    var repl = text.replace(/#(\w+)/g, '<a class="hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');
     return repl;
 }
 
