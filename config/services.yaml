@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    page_limit: 1
+    page_limit: 10
     container.dumper.inline_factories: true
     file_uploads: '%env(FILE_UPLOADS)%'
     secure_scheme: '%env(SECURE_SCHEME)%'

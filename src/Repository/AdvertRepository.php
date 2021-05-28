@@ -34,6 +34,30 @@ class AdvertRepository extends ServiceEntityRepository
             ->addSelect('c')
         ;
 
+        // category
+        if (isset($parameterArray['category'])) {
+            $categories = $parameterArray['category'];
+            if (\count($categories) > 0) {
+                $qb->andWhere('d.category IN (:categories)');
+                $qb->setParameter('categories', $categories);
+            }
+        }
+
+        // text search
+        if (isset($parameterArray['search_value']) && '' !== $parameterArray['search_value']) {
+            $field = $parameterArray['search_value'];
+            $qb->andWhere('Match (d.title, d.description) AGAINST (:searchQuery) > 0');
+            // $qb->andWhere('d.title LIKE :searchQuery');
+            $qb->setParameter('searchQuery', $field);
+        }
+
+        // state
+        if (isset($parameterArray['state']) && '' !== $parameterArray['state']) {
+            $state = $parameterArray['state'];
+            $qb->andWhere('d.state = :state');
+            $qb->setParameter('state', $state);
+        }
+
         return $qb;
     }
 

@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(indexes={@ORM\Index(columns={"title", "description"}, flags={"fulltext"})})
  */
 class Advert
 {

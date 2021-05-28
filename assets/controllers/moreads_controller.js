@@ -5,6 +5,7 @@ export default class extends Controller {
 
     nextPage(e) {
         let url = e.target.href;
+        console.log(url);
         fetch(url).then(function(response) {
             // The API call was successful!
             return response.text();

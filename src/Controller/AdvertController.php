@@ -10,7 +10,6 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
-use App\Form\AdvertSearchType;
 use App\Form\AdvertType;
 use App\Repository\AdvertRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -31,35 +30,6 @@ class AdvertController extends AbstractController
         $this->paginator = $paginator;
     }
 
-    #[Route('/', name: 'advert_index', methods: ['GET'])]
-    public function index(Request $request): Response
-    {
-        $form = $this->createForm(AdvertSearchType::class, null, []);
-
-        $page = $request->query->getInt('page', 1);
-
-        $form_data = [];
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $form_data = $form->getData();
-        }
-
-        $queryBuilder = $this->advertRepository->advancedFilter($form_data);
-
-        $pagination = $this->paginator->paginate(
-            $queryBuilder->getQuery(), /* query NOT result */
-            $page/*page number*/ ,
-            $this->getParameter('page_limit'), /*limit per page*/ /*limit per page*/
-            [
-                'pageParameterName' => 'page',
-            ]
-        );
-
-        return $this->render('advert/index.html.twig', [
-            'adverts' => $pagination,
-        ]);
-    }
-
     #[Route('/new', name: 'advert_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -72,7 +42,7 @@ class AdvertController extends AbstractController
             $entityManager->persist($advert);
             $entityManager->flush();
 
-            return $this->redirectToRoute('advert_index');
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
         }
 
         return $this->render('advert/new.html.twig', [
@@ -98,7 +68,7 @@ class AdvertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('advert_index');
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
         }
 
         return $this->render('advert/edit.html.twig', [
@@ -116,6 +86,6 @@ class AdvertController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('advert_index');
+        return $this->redirectToRoute('home');
     }
 }

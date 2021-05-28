@@ -21,6 +21,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@tailwindcss/forms": "^0.3.2",
         "@tailwindcss/postcss7-compat": "^2.0.3",
+        "form-serialize": "^0.7.2",
         "autoprefixer": "^9",
         "choices.js": "^9.0.1",
         "glob-all": "^3.2.1",

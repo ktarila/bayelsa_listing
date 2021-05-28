@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         $this->paginator = $paginator;
     }
 
-    #[Route('/', name: 'home', methods: ['GET'])]
+    #[Route('/', name: 'home', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $form = $this->createForm(AdvertSearchType::class, null, []);
@@ -36,9 +36,8 @@ class HomeController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         $form_data = [];
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $form_data = $form->getData();
+        if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $form_data = json_decode($request->getContent(), true);
         }
 
         $queryBuilder = $this->advertRepository->advancedFilter($form_data);
@@ -55,6 +54,7 @@ class HomeController extends AbstractController
         return $this->render('advert/index.html.twig', [
             'adverts' => $pagination,
             'next' => $page + 1,
+            'form' => $form->createView(),
             'hasItems' => \count($pagination->getItems()) > 0,
         ]);
     }
