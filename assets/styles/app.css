@@ -25,3 +25,7 @@ a object{
   background-image:linear-gradient(rgba(200, 72, 27, 0.7), rgba(200, 72, 27, 0.7)), url(../img/cover.png)
 }
 
+.fixed-container {
+    position: sticky;
+}
+

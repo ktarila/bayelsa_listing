@@ -11,7 +11,9 @@ namespace App\Controller;
 
 use App\Form\AdvertSearchType;
 use App\Repository\AdvertRepository;
+use App\Utils\Helpers;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +23,13 @@ class HomeController extends AbstractController
 {
     private $advertRepository;
     private $paginator;
+    private $helpers;
 
-    public function __construct(AdvertRepository $advertRepository, PaginatorInterface $paginator)
+    public function __construct(Helpers $helpers, AdvertRepository $advertRepository, PaginatorInterface $paginator)
     {
         $this->advertRepository = $advertRepository;
         $this->paginator = $paginator;
+        $this->helpers = $helpers;
     }
 
     #[Route('/', name: 'home', methods: ['GET', 'POST'])]
@@ -55,7 +59,48 @@ class HomeController extends AbstractController
             'adverts' => $pagination,
             'next' => $page + 1,
             'form' => $form->createView(),
-            'hasItems' => \count($pagination->getItems()) > 0,
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) > 0,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    #[Route('/my-ads', name: 'my_ads', methods: ['GET', 'POST'])]
+    public function myAds(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(AdvertSearchType::class, null, []);
+
+        $page = $request->query->getInt('page', 1);
+
+        $form_data = [];
+        if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $form_data = json_decode($request->getContent(), true);
+        }
+
+        $queryBuilder = $this->advertRepository->advancedFilter($form_data);
+
+        $queryBuilder
+            ->andWhere('d.email = :email OR d.user = :user_id')
+            ->setParameter('email', $user->getEmail())
+            ->setParameter('user_id', $user->getId())
+        ;
+
+        $pagination = $this->paginator->paginate(
+            $queryBuilder->getQuery(), /* query NOT result */
+            $page/*page number*/ ,
+            $this->getParameter('page_limit'), /*limit per page*/ /*limit per page*/
+            [
+                'pageParameterName' => 'page',
+            ]
+        );
+
+        return $this->render('advert/index.html.twig', [
+            'adverts' => $pagination,
+            'next' => $page + 1,
+            'form' => $form->createView(),
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) > 0,
         ]);
     }
 }
