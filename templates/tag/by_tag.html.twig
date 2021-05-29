@@ -2,7 +2,7 @@
 {% block title %}{{ tag }}{% endblock %}
 {% block body %}
 <div>
-    <div class="search rounded bg-deep-orange-700 dark:bg-gray-700 shadow">
+    <div class="page-title search rounded bg-deep-orange-700 dark:bg-gray-700 shadow">
         <h2 class="px-3 text-4xl text-white font-semibold tracking-wide leading-relaxed">#{{tag}}</h2>
     </div>
 </div>
@@ -20,7 +20,7 @@
                         <div>
                             <div class="inline-block relative ">
                                 <a onclick="toggleDD('menu-links_{{loop.index}}')" class="w-52 cursor-pointer drop-button text-gray-700 dark:text-gray-100 focus:outline-none text-xs md:text-sm inline-block flex items-center justify-end drop-button">
-                                    <span class="no-pointer-event flex bg-deep-orange-600  text-gray-100 px-3 py-2 rounded font-semibold"> <span class="inline-block pr-2"> actions</span>
+                                    <span class="no-pointer-event flex bg-deep-orange-600  text-white px-3 py-2 rounded font-semibold"> <span class="inline-block pr-2"> actions</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="border-l border-deep-orange-400 ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg> <span> </a>
@@ -75,19 +75,19 @@
                         <span>{{ advert.createdAt|ago_date}}</span>
                     </div>
                     <div class="flex items-center mt-4 w-full">
-                        <div class="mr-3 flex  items-center text-md text-blue-600 dark:text-white">
+                        <div class="mr-3 flex  items-center text-md text-deep-orange-500 dark:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
                                 <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
                             </svg> <span>5 comments </span>
                         </div>
-                        <div class="mr-3 flex items-center  text-md text-blue-600 dark:text-white">
+                        <div class="mr-3 flex items-center  text-md text-deep-orange-500 dark:text-white">
                             <span>28 ups</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                             </svg>
                         </div>
-                        <div class="w-1/3 flex items-center text-md text-blue-600 dark:text-white">
+                        <div class="w-1/3 flex items-center text-md text-deep-orange-500 dark:text-white">
                             <span>28 downs</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />

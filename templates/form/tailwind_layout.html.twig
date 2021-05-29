@@ -12,7 +12,7 @@
     {{- parent() -}}
 {%- endblock widget_attributes -%}
 
-{% block widget_class %}mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs rounded bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-400{% endblock widget_class %}
+{% block widget_class %}mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-400{% endblock widget_class %}
 
 {% block widget_disabled_class %}border-gray-300 text-gray-500{% endblock widget_disabled_class %}
 
@@ -23,7 +23,7 @@
     {{- parent() -}}
 {%- endblock form_label -%}
 
-{% block label_class %}text-sm font-bold text-gray-700 dark:text-gray-100 tracking-wide{% endblock label_class %}
+{% block label_class %}text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed{% endblock label_class %}
 
 {% block label_errors_class %}border-red-700{% endblock label_errors_class %}
 

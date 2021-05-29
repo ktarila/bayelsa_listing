@@ -21,3 +21,7 @@ a object{
     pointer-events: none;
 }
 
+.page-title {
+  background-image:linear-gradient(rgba(200, 72, 27, 0.7), rgba(200, 72, 27, 0.7)), url(../img/cover.png)
+}
+
