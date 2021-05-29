@@ -1,4 +1,8 @@
-<ul class="flex flex-wrap w-full text-md items-center font-medium text-gray-700 dark:text-gray-100 mt-10">
+<ul class="flex flex-wrap w-full text-md items-center font-medium text-gray-700 dark:text-gray-100 mt-6">
+    {% if app.user %}
+        <h2 class="text-lg mb-3 ml-3 truncate text-blue-700 dark:text-white">Hi {{ app.user.fullname }}!</h2>
+
+    {% endif %}
     <li class="n-link hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full flex items-center">
         <a href="{{ path("home")}}" class="p-3 flex items-center w-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -7,12 +11,14 @@
             <span>Home</span>
         </a>
     </li>
+    {% if app.user %}
     <li class="hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full p-3 flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
         </svg>
         <span>My Ads</span>
     </li>
+{% endif %}
     <li class="border-t dark:border-gray-700 mt-10 pt-5 hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full p-3 flex items-center">
         <i class="fas fa-store mr-3"></i>
         <span>Sellers</span>
@@ -29,14 +35,25 @@
         </svg>
         <span>Tags</span>
     </li>
+    {% if app.user %}
+    <li class="border-t dark:border-gray-700 mt-20 hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full">
+        <a href="{{ path("app_logout")}}" class="p-3 flex items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+            <span>Logout</span>
+        </a>
+    </li>
+{% else %}
     <li class="border-t dark:border-gray-700 mt-20 hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full">
         <a href="{{ path("app_login")}}" class="p-3 flex items-center w-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
-            <span>Login/Register</span>
+            <span>Login</span>
         </a>
     </li>
+{% endif %}
     <li class="dark:border-gray-700 pt-5 hover:bg-deep-orange-600 hover:text-gray-100  rounded-l cursor-pointer w-full p-3 flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

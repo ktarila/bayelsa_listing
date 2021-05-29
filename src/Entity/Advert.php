@@ -106,6 +106,11 @@ class Advert
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="adverts")
+     */
+    private $user;
+
     public function __construct()
     {
         $now = new \DateTime();
@@ -316,6 +321,18 @@ class Advert
     public function removeTag(Tag $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

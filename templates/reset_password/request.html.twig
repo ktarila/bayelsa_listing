@@ -1,22 +1,27 @@
 {% extends 'base_security.html.twig' %}
-
 {% block title %}Reset your password{% endblock %}
-
 {% block body %}
+<div class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+    <h2 class="text-center text-4xl text-deep-orange-700 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold dark:text-white">Reset Password</h2>
     {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    <div class="my-5 bg-red-500 rounded px-3 py-2 w-full items-center  font-semibold text-white flex">
+        <span>{{ flashError }}</span></div>
     {% endfor %}
-    <h1>Reset your password</h1>
-
-    {{ form_start(requestForm) }}
+    <div class="mt-8" data-controller="security">
+        {{ form_start(requestForm) }}
         {{ form_row(requestForm.email) }}
-        <div>
-            <small>
+        <div class="mt-6">
+            <span class="font-medium tracking-wide leading-relaxed text-md dark:text-white">
                 Enter your email address and we we will send you a
                 link to reset your password.
-            </small>
+            </span>
         </div>
+        <button class="mt-8 bg-deep-orange-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-deep-orange-600 shadow-lg">Send password reset email</button>
+        {{ form_end(requestForm) }}
 
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+        <div class="mt-12 text-sm font-display font-semibold text-gray-700 dark:text-white text-center">
+            <a href="{{ path("app_login")}}" class="cursor-pointer text-deep-orange-600 hover:text-deep-orange-800 dark:text-deep-orange-200">Back to login</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

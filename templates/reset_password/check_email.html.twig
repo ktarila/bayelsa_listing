@@ -3,9 +3,9 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
-    <p>
+    <p class="mt-12 text-lg mb-5 dark:text-white tracking-wide leading-relaxed px-10">
         If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
         This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <p class="text-lg dark:text-white tracking-wide leading-relaxed px-10">If you don't receive an email please check your spam folder or <a class="text-blue-500 hover:text-deep-orange-500" href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
 {% endblock %}

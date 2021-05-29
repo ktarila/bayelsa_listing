@@ -98,6 +98,6 @@
 {%- endblock checkbox_row -%}
 
 {%- block checkbox_widget -%}
-    {%- set attr = attr|merge({ class: attr.class|default('mr-2') }) -%}
+    {%- set attr = attr|merge({ class: attr.class|default('mr-2 text-deep-orange-700 focus:ring-deep-orange-500') }) -%}
     {{- parent() -}}
 {%- endblock checkbox_widget -%}

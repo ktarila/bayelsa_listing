@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | Buyers and Sellers NG </title>
     {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -34,9 +34,9 @@
                     <div class="cursor-pointer flex items-center">
                        <div class="flex flex-wrap justify-between items-center w-full">
                 <a href="{{ path("home")}}" class="w-full lg:w-auto flex title-font font-medium items-center dark:text-white text-gray-900 mb-4 md:mb-0">
-                   <span class="text-deep-orange-500 font-black text-2xl sm:text-4xl">Buyers</span>
-                   <span class="font-black mt-2 text-lg sm:text-2xl">and</span>
-                   <span class="text-deep-orange-500 font-black text-2xl sm:text-4xl">Sellers</span> 
+                   <span class="text-white  dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Buyers</span>
+                   <span class="font-black  mt-2 text-lg sm:text-2xl">and</span>
+                   <span class="text-white dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Sellers</span> 
                    <span class="font-black text-2xl sm:text-4xl">.ng</span>
                 </a>
             </div> 
