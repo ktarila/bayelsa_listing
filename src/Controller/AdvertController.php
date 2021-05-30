@@ -10,8 +10,10 @@
 namespace App\Controller;
 
 use App\Entity\Advert;
+use App\Entity\Comment;
 use App\Form\AdvertType;
-use App\Repository\AdvertRepository;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +23,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/advert')]
 class AdvertController extends AbstractController
 {
-    private $advertRepository;
+    private $commentRepository;
     private $paginator;
 
-    public function __construct(AdvertRepository $advertRepository, PaginatorInterface $paginator)
+    public function __construct(CommentRepository $commentRepository, PaginatorInterface $paginator)
     {
-        $this->advertRepository = $advertRepository;
+        $this->commentRepository = $commentRepository;
         $this->paginator = $paginator;
     }
 
@@ -51,12 +53,42 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'advert_show', methods: ['GET'])]
-    public function show(Advert $advert): Response
+    #[Route('/{id}', name: 'advert_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Advert $advert): Response
     {
-        return $this->render('advert/show.html.twig', [
-            'advert' => $advert,
-        ]);
+        $parameters = ['advert' => $advert];
+
+        $page = $request->query->getInt('page', 1);
+
+        $queryBuilder = $this->commentRepository->getAdvertComments($advert);
+
+        $comments = $this->paginator->paginate(
+            $queryBuilder->getQuery(), /* query NOT result */
+            $page/*page number*/ ,
+            $this->getParameter('page_limit'), /*limit per page*/ /*limit per page*/
+            [
+                'pageParameterName' => 'page',
+            ]
+        );
+        $parameters['comments'] = $comments;
+        if ($this->isGranted('ROLE_USER')) {
+            $user = $this->getUser();
+            $comment = new Comment();
+            $comment->setAdvert($advert)->setUser($user);
+            $form = $this->createForm(CommentType::class, $comment);
+            $form->handleRequest($request);
+            $parameters['commentForm'] = $form->createView();
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($comment);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('comment_show', ['id' => $comment->getId()]);
+            }
+        }
+
+        return $this->render('advert/show.html.twig', $parameters);
     }
 
     #[Route('/{id}/edit', name: 'advert_edit', methods: ['GET', 'POST'])]

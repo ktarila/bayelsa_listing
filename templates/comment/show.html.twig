@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Single Comment{% endblock %}
+{% block body %}
+<div id="parent-container">
+    <div class="single-comment flex w-full flex-wrap bg-white shadow-xs border p-3 mb-1">
+        <div class="w-full">
+            {{ comment.content|nl2br}}
+        </div>
+        <div class="meta flex flex-wrap mt-5">
+            <span class="w-full text-sm font-medium">{{comment.user.fullname}}</span>
+            <span class="w-full text-sm font-light italic">{{comment.createdAt|ago_date}}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

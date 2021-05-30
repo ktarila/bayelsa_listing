@@ -89,14 +89,37 @@
                 <p class="has-tag">{{ advert.description|nl2br}}</p>
             </div>
         </div>
-        <div class="comments mt-5 shadow w-full rounded bg-white dark:bg-gray-600 dark:text-gray-100 p-5">
+        <div data-controller="comment" class="comments mt-5 shadow w-full rounded bg-white dark:bg-gray-600 dark:text-gray-100 p-5">
             <h3 class="text-2xl font-semibold tracking-wide leading-relaxed">Comments</h3>
-            <textarea rows="4" placeholder="Enter Comment" class="mt-1 w-full text-lg p-5 border-0 border-b-2 shadow-xs rounded bg-gray-50 border-gray-300 focus:border-indigo-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-400"></textarea>
-            {% for i in 1 .. 10 %}
-            <div class="co">
-                Comment {{loop.index}}
+            {% if commentForm is defined %}
+            <div class="mb-5">
+                {{ form_start(commentForm, {'attr': {'id': 'comment_form', 'data-action':'submit->comment#catch_parent'}}) }}
+                {{ form_widget(commentForm.content, {'attr': {'data-id': 'content_form_content'}}) }}
+                {{ form_widget(commentForm) }}
+                <div class="flex justify-end">
+                    <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-deep-orange-600 dark:bg-deep-orange-800 hover:bg-deep-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-orange-500">{{ button_label|default('Submit Comment') }}</button>
+                </div>
+                {{ form_end(commentForm) }}
             </div>
+            {% else %}
+            <div class="w-full flex justify-end my-1">
+            <a class="rounded font-semibold bg-deep-orange-700 hover:bg-deep-orange-600 text-white px-2 py-1 text-white" href="{{ path('app_login')}}">Login to comment</a>
+        </div>
+            {% endif %}
+            <div id="comments-container">
+            {% for comment in comments %}
+                <div class="single-comment flex w-full flex-wrap bg-white shadow-xs border p-3 mb-1">
+                    <div class="w-full">
+                        {{ comment.content|nl2br}}
+                    </div>
+                    <div class="meta flex flex-wrap mt-5">
+                        <span class="w-full text-sm font-medium">{{comment.user.fullname}}</span>
+                        <span class="w-full text-sm font-light italic">{{comment.createdAt|ago_date}}</span>
+                    </div>
+                </div>
+            
             {% endfor %}
+            </div>
         </div>
     </div>
     <div class="hidden lg:block right w-full md:w-1/5 mt-5 md:mt-2 ">
