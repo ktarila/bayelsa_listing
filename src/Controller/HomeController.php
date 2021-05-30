@@ -59,7 +59,7 @@ class HomeController extends AbstractController
             'adverts' => $pagination,
             'next' => $page + 1,
             'form' => $form->createView(),
-            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) > 0,
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) === $this->getParameter('page_limit'),
         ]);
     }
 
@@ -100,7 +100,79 @@ class HomeController extends AbstractController
             'adverts' => $pagination,
             'next' => $page + 1,
             'form' => $form->createView(),
-            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) > 0,
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) === $this->getParameter('page_limit'),
+        ]);
+    }
+
+    #[Route('/buyers', name: 'buyers', methods: ['GET', 'POST'])]
+    public function listBuyers(Request $request): Response
+    {
+        $form = $this->createForm(AdvertSearchType::class, null, ['category' => 'buy']);
+
+        $page = $request->query->getInt('page', 1);
+
+        $form_data = [];
+        if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $form_data = json_decode($request->getContent(), true);
+        }
+
+        $queryBuilder = $this->advertRepository->advancedFilter($form_data);
+
+        $queryBuilder
+            ->andWhere('c.name = :buy')
+            ->setParameter('buy', 'buy')
+        ;
+
+        $pagination = $this->paginator->paginate(
+            $queryBuilder->getQuery(), /* query NOT result */
+            $page/*page number*/ ,
+            $this->getParameter('page_limit'), /*limit per page*/ /*limit per page*/
+            [
+                'pageParameterName' => 'page',
+            ]
+        );
+
+        return $this->render('advert/index.html.twig', [
+            'adverts' => $pagination,
+            'next' => $page + 1,
+            'form' => $form->createView(),
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) === $this->getParameter('page_limit'),
+        ]);
+    }
+
+    #[Route('/sellers', name: 'sellers', methods: ['GET', 'POST'])]
+    public function listSellers(Request $request): Response
+    {
+        $form = $this->createForm(AdvertSearchType::class, null, ['category' => 'sell']);
+
+        $page = $request->query->getInt('page', 1);
+
+        $form_data = [];
+        if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $form_data = json_decode($request->getContent(), true);
+        }
+
+        $queryBuilder = $this->advertRepository->advancedFilter($form_data);
+
+        $queryBuilder
+            ->andWhere('c.name != :buy')
+            ->setParameter('buy', 'buy')
+        ;
+
+        $pagination = $this->paginator->paginate(
+            $queryBuilder->getQuery(), /* query NOT result */
+            $page/*page number*/ ,
+            $this->getParameter('page_limit'), /*limit per page*/ /*limit per page*/
+            [
+                'pageParameterName' => 'page',
+            ]
+        );
+
+        return $this->render('advert/index.html.twig', [
+            'adverts' => $pagination,
+            'next' => $page + 1,
+            'form' => $form->createView(),
+            'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) === $this->getParameter('page_limit'),
         ]);
     }
 }

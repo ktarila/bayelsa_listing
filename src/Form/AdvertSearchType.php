@@ -11,6 +11,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\State;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,6 +34,27 @@ class AdvertSearchType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'class' => Category::class,
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    $category = $options['category'];
+                    if ('buy' === $category) {
+                        return $er->createQueryBuilder('c')
+                            ->andWhere('c.name = :buy')
+                            ->setParameter('buy', 'buy')
+                            ->orderBy('c.id', 'ASC')
+                            ;
+                    }
+                    if ('sell' === $category) {
+                        return $er->createQueryBuilder('c')
+                            ->andWhere('c.name != :buy')
+                            ->setParameter('buy', 'buy')
+                            ->orderBy('c.id', 'ASC')
+                            ;
+                    }
+
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.id', 'ASC')
+                    ;
+                },
                 'required' => false,
                 'attr' => ['name' => 'category'],
             ])
@@ -42,6 +64,7 @@ class AdvertSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'category' => null,
         ]);
     }
 
