@@ -46,7 +46,7 @@ class CreateTagsHandler implements MessageHandlerInterface
                 $tag = $tagRepo->findOneBy(['name' => $hashtag]);
                 if (null === $tag) {
                     $tag = new Tag();
-                    $tag->setName($hashtag);
+                    $tag->setName(strtolower($hashtag));
                     $this->entityManager->persist($tag);
                 }
                 $advert->addTag($tag);

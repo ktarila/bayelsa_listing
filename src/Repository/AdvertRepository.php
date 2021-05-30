@@ -58,6 +58,8 @@ class AdvertRepository extends ServiceEntityRepository
             $qb->setParameter('state', $state);
         }
 
+        $qb->orderBy('d.createdAt', 'DESC');
+
         return $qb;
     }
 

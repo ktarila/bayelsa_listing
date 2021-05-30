@@ -14,6 +14,7 @@ use App\Entity\Comment;
 use App\Form\AdvertType;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use App\Utils\Helpers;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +26,13 @@ class AdvertController extends AbstractController
 {
     private $commentRepository;
     private $paginator;
+    private $helpers;
 
-    public function __construct(CommentRepository $commentRepository, PaginatorInterface $paginator)
+    public function __construct(Helpers $helpers, CommentRepository $commentRepository, PaginatorInterface $paginator)
     {
         $this->commentRepository = $commentRepository;
         $this->paginator = $paginator;
+        $this->helpers = $helpers;
     }
 
     #[Route('/new', name: 'advert_new', methods: ['GET', 'POST'])]
@@ -87,6 +90,9 @@ class AdvertController extends AbstractController
                 return $this->redirectToRoute('comment_show', ['id' => $comment->getId()]);
             }
         }
+
+        $parameters['next'] = $page + 1;
+        $parameters['hasItems'] = \count($this->helpers->iterable_to_array($comments->getItems())) === $this->getParameter('page_limit');
 
         return $this->render('advert/show.html.twig', $parameters);
     }

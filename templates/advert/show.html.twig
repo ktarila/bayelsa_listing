@@ -103,22 +103,27 @@
             </div>
             {% else %}
             <div class="w-full flex justify-end my-1">
-            <a class="rounded font-semibold bg-deep-orange-700 hover:bg-deep-orange-600 text-white px-2 py-1 text-white" href="{{ path('app_login')}}">Login to comment</a>
-        </div>
+                <a class="rounded font-semibold bg-deep-orange-700 hover:bg-deep-orange-600 text-white px-2 py-1 text-white" href="{{ path('app_login')}}">Login to comment</a>
+            </div>
             {% endif %}
             <div id="comments-container">
-            {% for comment in comments %}
+                {% for comment in comments %}
                 <div class="single-comment flex w-full flex-wrap bg-white shadow-xs border p-3 mb-1">
+                    <div class="meta block mb-2">
+                        <span class="w-full text-sm font-medium">{{comment.user.fullname}}</span>
+                        <span class="w-full text-sm font-light italic"> - {{comment.createdAt|ago_date}}</span>
+                    </div>
                     <div class="w-full">
                         {{ comment.content|nl2br}}
                     </div>
-                    <div class="meta flex flex-wrap mt-5">
-                        <span class="w-full text-sm font-medium">{{comment.user.fullname}}</span>
-                        <span class="w-full text-sm font-light italic">{{comment.createdAt|ago_date}}</span>
-                    </div>
                 </div>
-            
-            {% endfor %}
+                {% endfor %}
+            </div>
+            <div id="paginate-container" class="navigation flex justify-center items-center">
+                {% if hasItems == true %}
+                {% set nextUrl = path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': next, 'id': advert.id})) %}
+                <a data-action="click->comment#nextPage" class="font-semibold mt-5 bg-deep-orange-600 px-3 py-2 hover:bg-deep-orange-700 text-white rounded-full" href="{{ nextUrl }}"> more comments</a>
+                {% endif %}
             </div>
         </div>
     </div>

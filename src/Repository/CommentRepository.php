@@ -35,6 +35,7 @@ class CommentRepository extends ServiceEntityRepository
             ->andWhere('c.advert = :advert_id')
             ->andWhere('c.parent is null')
             ->setParameter('advert_id', $advert->getId())
+            ->orderBy('c.createdAt', 'DESC')
         ;
     }
 
