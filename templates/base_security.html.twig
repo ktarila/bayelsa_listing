@@ -13,8 +13,8 @@
     {% endblock %}
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-700 font-sans antialiased leading-normal tracking-normal ">
-            <div class="fixed right-0 top-0" data-controller="mode">
+<body class="bg-gray-50 dark:bg-gray-900 font-sans antialiased leading-normal tracking-normal ">
+    <div class="fixed right-0 top-0" data-controller="mode">
         <button class="inline-flex bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-0" data-action="click->mode#toggleDarkMode">
             <div data-mode-target="dark">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -28,29 +28,29 @@
             </div>
         </button>
     </div>
-        <div class="lg:flex">
-            <div class="lg:w-1/2 xl:max-w-screen-sm">
-                <div class="py-12 bg-deep-orange-600 lg:bg-white dark:bg-gray-600 flex justify-center lg:justify-start lg:px-12">
-                    <div class="cursor-pointer flex items-center">
-                       <div class="flex flex-wrap justify-between items-center w-full">
-                <a href="{{ path("home")}}" class="w-full lg:w-auto flex title-font font-medium items-center dark:text-white text-gray-900 mb-4 md:mb-0">
-                   <span class="text-white  dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Buyers</span>
-                   <span class="font-black  mt-2 text-lg sm:text-2xl">and</span>
-                   <span class="text-white dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Sellers</span> 
-                   <span class="font-black text-2xl sm:text-4xl">.ng</span>
-                </a>
-            </div> 
+    <div class="lg:flex">
+        <div class="lg:w-1/2 xl:max-w-screen-sm">
+            <div class="py-12 bg-deep-orange-600 lg:bg-white dark:bg-gray-900 flex justify-center lg:justify-start lg:px-12">
+                <div class="cursor-pointer flex items-center">
+                    <div class="flex flex-wrap justify-between items-center w-full">
+                        <a href="{{ path("home")}}" class="w-full lg:w-auto flex title-font font-medium items-center dark:text-white text-gray-900 mb-4 md:mb-0">
+                            <span class="text-white  dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Buyers</span>
+                            <span class="font-black  mt-2 text-lg sm:text-2xl">and</span>
+                            <span class="text-white dark:text-deep-orange-600 lg:text-deep-orange-500 font-black text-2xl sm:text-4xl">Sellers</span>
+                            <span class="font-black text-2xl sm:text-4xl">.ng</span>
+                        </a>
                     </div>
                 </div>
-                {% block body %}
-                
-            {% endblock %}
             </div>
-            <div class="hidden lg:flex items-center justify-center bg-deep-orange-50 dark:bg-gray-800 flex-1 h-screen">
-                <div class="max-w-lg transform duration-200 hover:scale-110 cursor-pointer">
-                    <img style="width: 600px" src="{{asset('images/back.png')}}" alt="Room Image">
-                </div>
+            {% block body %}
+            {% endblock %}
+        </div>
+        <div class="hidden lg:flex items-center justify-center bg-deep-orange-50 dark:bg-gray-800 flex-1 h-screen">
+            <div class="max-w-lg transform duration-200 hover:scale-110 cursor-pointer">
+                <img style="width: 600px" src="{{asset('images/back.png')}}" alt="Room Image">
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

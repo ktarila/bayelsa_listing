@@ -3,7 +3,7 @@
 {% block body %}
 <div class="content flex flex-wrap justify-between">
     <div class="left md:w-3/4 w-full my-2 rounded-t">
-        <div class="bg-white dark:bg-gray-600 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
+        <div class="bg-white dark:bg-gray-900 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
             <div class="page-title bg-deep-orange-900 text-white dark:bg-gray-700 w-full text-white p-5 rounded-t">
                 <div class="w-full">
                     <div class="flex justify-between">
@@ -89,7 +89,7 @@
                 <p class="has-tag">{{ advert.description|nl2br}}</p>
             </div>
         </div>
-        <div data-controller="comment" class="comments mt-5 shadow w-full rounded bg-white dark:bg-gray-600 dark:text-gray-100 p-5">
+        <div data-controller="comment" class="comments mt-5 shadow w-full rounded bg-white dark:bg-gray-900 dark:text-gray-100 p-5">
             <h3 class="text-2xl font-semibold tracking-wide leading-relaxed">Comments</h3>
             {% if commentForm is defined %}
             <div class="mb-5">
@@ -108,7 +108,7 @@
             {% endif %}
             <div id="comments-container">
                 {% for comment in comments %}
-                <div class="single-comment flex w-full flex-wrap bg-white shadow-xs border p-3 mb-1">
+                <div class="single-comment flex w-full flex-wrap bg-white dark:bg-gray-800 shadow-xs border dark:border-gray-700 p-3 mb-1">
                     <div class="meta block mb-2">
                         <span class="w-full text-sm font-medium">{{comment.user.fullname}}</span>
                         <span class="w-full text-sm font-light italic"> - {{comment.createdAt|ago_date}}</span>

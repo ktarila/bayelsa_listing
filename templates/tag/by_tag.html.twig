@@ -9,7 +9,7 @@
 <div class="content mt-5 flex flex-wrap justify-between">
     <div class="left md:w-3/4 w-full my-2">
         {% for advert in adverts %}
-        <div class="bg-white dark:bg-gray-600 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
+        <div class="bg-white dark:bg-gray-900 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
             <div class="w-full md:w-1/5">
                 <img class="w-full h-full md:h-52 rounded-l-sm" src="{{asset('images/feature.jpg')}}" alt="Room Image">
             </div>
@@ -75,19 +75,19 @@
                         <span>{{ advert.createdAt|ago_date}}</span>
                     </div>
                     <div class="flex items-center mt-4 w-full">
-                        <div class="mr-3 flex  items-center text-md text-deep-orange-500 dark:text-white">
+                        <div class="mr-3 flex  items-center text-md text-deep-orange-500 dark:text-deep-orange-200">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
                                 <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
                             </svg> <span>5 comments </span>
                         </div>
-                        <div class="mr-3 flex items-center  text-md text-deep-orange-500 dark:text-white">
+                        <div class="mr-3 flex items-center  text-md text-deep-orange-500 dark:text-deep-orange-200">
                             <span>28 ups</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                             </svg>
                         </div>
-                        <div class="w-1/3 flex items-center text-md text-deep-orange-500 dark:text-white">
+                        <div class="w-1/3 flex items-center text-md text-deep-orange-500 dark:text-deep-orange-200">
                             <span>28 downs</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
