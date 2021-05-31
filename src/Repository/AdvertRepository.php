@@ -74,6 +74,18 @@ class AdvertRepository extends ServiceEntityRepository
         ;
     }
 
+    public function countComments(Advert $advert): int
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.comments', 'c')
+            ->select('COUNT(c.id) as count')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $advert->getId())
+        ;
+
+        return $qb->getQuery()->getSingleResult()['count'];
+    }
+
     // /**
     //  * @return Advert[] Returns an array of Advert objects
     //  */

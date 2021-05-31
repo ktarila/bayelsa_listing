@@ -116,6 +116,21 @@ class Advert
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $commentCount = 0;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $userLikes = [];
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $userDislikes = [];
+
     public function __construct()
     {
         $now = new \DateTime();
@@ -369,6 +384,129 @@ class Advert
                 $comment->setAdvert(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCommentCount(): ?int
+    {
+        return $this->commentCount;
+    }
+
+    public function setCommentCount(int $commentCount): self
+    {
+        $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+    /**
+     * Returns the user likes.
+     */
+    public function getUserLikes(): array
+    {
+        $userLikes = null !== $this->userLikes ? array_values($this->userLikes) : [];
+
+        return array_unique($userLikes);
+    }
+
+    public function setUserLikes(array $userLikes): self
+    {
+        $this->userLikes = array_unique($userLikes);
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function userLiked(?User $user)
+    {
+        if (null === $user) {
+            return false;
+        }
+        if (\in_array($user->getId(), $this->getUserLikes(), true)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addUserLike(User $user): self
+    {
+        $userLikes = $this->getUserLikes();
+        $userLikes[] = $user->getId();
+
+        return $this->setUserLikes($userLikes);
+    }
+
+    public function removeUserLike(User $user): self
+    {
+        $users = $this->getUserLikes();
+        $pos = array_search($user->getId(), $users, true);
+        if (false !== $pos) {
+            unset($users[$pos]);
+        }
+
+        return $this->setUserLikes($users);
+    }
+
+    /**
+     * Returns the user dislikes.
+     */
+    public function getUserDislikes(): array
+    {
+        $userDislikes = null !== $this->userDislikes ? array_values($this->userDislikes) : [];
+
+        return array_unique($userDislikes);
+    }
+
+    public function setUserDislikes(array $userDislikes): self
+    {
+        $this->userDislikes = array_unique($userDislikes);
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function userDisliked(User $user)
+    {
+        if (\in_array($user->getId(), $this->getUserDislikes(), true)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addUserDislike(User $user): self
+    {
+        $userDislikes = $this->getUserDislikes();
+        $userDislikes[] = $user->getId();
+
+        return $this->setUserDislikes($userDislikes);
+    }
+
+    public function removeUserDislike(User $user): self
+    {
+        $users = $this->getUserDislikes();
+        $pos = array_search($user->getId(), $users, true);
+        if (false !== $pos) {
+            unset($users[$pos]);
+        }
+
+        return $this->setUserDislikes($users);
+    }
+
+    /**
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     */
+    public function updateLikesAndDislikes(): self
+    {
+        $this->likes = \count($this->getUserLikes());
+        $this->unlikes = \count($this->getUserDislikes());
 
         return $this;
     }

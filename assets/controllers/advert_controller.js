@@ -90,7 +90,17 @@ export default class extends Controller {
 
                 // replace ads
                 let ad_container = doc.getElementById('advert-container');
-                console.log(ad_container.innerHTML);
+                // console.log(ad_container.innerHTML);
+                let children = (ad_container.children);
+                for (let child of children) {
+                    // update has tags
+                    var containsTag = child.querySelectorAll('.has-tag');
+                    for (var i = containsTag.length - 1; i >= 0; i--) {
+                        let text = containsTag[i].innerHTML;
+                        containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
+                    }
+
+                }
                 document.getElementById('advert-container').innerHTML = ad_container.innerHTML;
 
                 // replace loadmore button
@@ -164,7 +174,7 @@ export default class extends Controller {
             // There was an error
             console.warn('Something went wrong.', err);
         });
-        
+
 
     }
 

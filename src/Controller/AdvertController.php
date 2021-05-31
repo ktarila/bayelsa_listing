@@ -16,6 +16,7 @@ use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Utils\Helpers;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -125,5 +126,26 @@ class AdvertController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
+    }
+
+    /*
+     * IsGranted('ROLE_USER')
+    */
+
+    #[Route('/toggle/like/{id}/{csrf}', name: 'advert_like_toggle', methods: ['GET'])]
+    public function toggleLike(Advert $advert, $csrf): Response
+    {
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('togglelike'.$advert->getId(), $csrf)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            if ($advert->userLiked($user)) {
+                $advert->removeUserLike($user);
+            } else {
+                $advert->addUserLike($user);
+            }
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
     }
 }
