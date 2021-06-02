@@ -178,4 +178,42 @@ export default class extends Controller {
 
     }
 
+
+    toggleLike(e) {
+        event.preventDefault(e);
+        console.log('toggle like');
+        let url = event.target.href;
+        let element = event.target;
+        let parent = event.target.parentNode;
+        console.log(url);
+        fetch(url).then(function(response) {
+            // The API call was successful!
+            return response.text();
+        }).then(function(body) {
+
+            let resp = JSON.parse(body);
+            parent.classList.toggle('text-deep-orange-600');
+            parent.classList.toggle('text-gray-500');
+            parent.classList.toggle('dark:text-gray-100');
+
+            // increment numlikes
+            let span_likes = document.getElementById(element.dataset.numlikes);
+
+            let num_likes = parseInt(span_likes.innerHTML);
+            if (resp.removed && num_likes > 0) {
+                span_likes.innerHTML = num_likes - 1;
+            }
+
+            if (!resp.removed) {
+                span_likes.innerHTML = num_likes + 1;
+            }
+
+
+        }).catch(function(err) {
+            // There was an error
+            console.warn('Something went wrong.', err);
+        });
+
+    }
+
 }
