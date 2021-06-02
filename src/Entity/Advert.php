@@ -471,8 +471,11 @@ class Advert
     /**
      * @param mixed $role
      */
-    public function userDisliked(User $user)
+    public function userDisliked(?User $user)
     {
+        if (null === $user) {
+            return false;
+        }
         if (\in_array($user->getId(), $this->getUserDislikes(), true)) {
             return true;
         }

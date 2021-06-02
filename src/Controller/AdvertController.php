@@ -136,8 +136,9 @@ class AdvertController extends AbstractController
     public function toggleLike(Advert $advert, $csrf): Response
     {
         $user = $this->getUser();
+
         $removed = false;
-        if ($this->isCsrfTokenValid('togglelike'.$advert->getId(), $csrf)) {
+        if ($this->isCsrfTokenValid('togglelike'.$advert->getId(), $csrf) && null !== $user) {
             $entityManager = $this->getDoctrine()->getManager();
             if ($advert->userLiked($user)) {
                 $advert->removeUserLike($user);
@@ -156,7 +157,7 @@ class AdvertController extends AbstractController
     {
         $user = $this->getUser();
         $removed = false;
-        if ($this->isCsrfTokenValid('toggledislike'.$advert->getId(), $csrf)) {
+        if ($this->isCsrfTokenValid('toggledislike'.$advert->getId(), $csrf) && null !== $user) {
             $entityManager = $this->getDoctrine()->getManager();
             if ($advert->userDisliked($user)) {
                 $advert->removeUserDislike($user);
