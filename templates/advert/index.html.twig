@@ -41,12 +41,12 @@
         <div class="left md:w-3/4 w-full my-2">
             <div id="advert-container" class="w-full">
                 {% for advert in adverts %}
-                <div class="bg-white dark:bg-gray-900 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
+                <div  class="bg-white dark:bg-gray-900 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
                     <div class="w-full md:w-1/5">
                         <img class="w-full h-full md:h-52 rounded-l-sm" src="{{asset('images/feature.jpg')}}" alt="Room Image">
                     </div>
-                    <div class="w-full md:w-4/5 flex flex-col">
-                        <div class="p-4 pb-3 md:pb-0 flex-1 w-full">
+                    <div data-action="click->advert#catch_click" data-href="{{path('advert_show', {'id': advert.id})}}" class="w-full md:w-4/5 flex flex-col cursor-pointer">
+                        <div class="p-4 pb-3 md:pb-0 flex-1 w-full" data-href="{{path('advert_show', {'id': advert.id})}}">
                             <div class="flex justify-between items-center mb-1">
                                 <a href="{{path('advert_show', {'id': advert.id})}}" class="w-5/6 font-medium text-gray-900 dark:text-white text-xl md:text-2xl truncate">{{advert.title}}</a>
                                 <div>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-sm font-light flex items-center mb-4 flex-wrap">
+                        <div data-href="{{path('advert_show', {'id': advert.id})}}" class="text-sm font-light flex items-center mb-4 flex-wrap">
                             <div class="flex mr-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -109,8 +109,8 @@
                         <div class="tags mt-5 text-gray-600 dark:text-white text-sm italic">
                             <span>{{ advert.createdAt|ago_date}}</span>
                         </div>
-                        <div class="flex justify-between mt-4">
-                            <div class="flex static relative right-0 items-center  w-full">
+                        <div class="flex justify-between mt-4" data-href="{{path('advert_show', {'id': advert.id})}}">
+                            <div data-href="{{path('advert_show', {'id': advert.id})}}" class="flex static relative right-0 items-center  w-full">
                                 <div class="mr-3 flex  items-center text-md text-gray-500 dark:text-gray-100">
                                     <span> {{ advert.commentCount }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,17 +119,19 @@
                                 </div>
                                 <div class="mr-3 flex items-center  text-md {% if advert.userLiked(app.user) %} text-deep-orange-600 {% else %}text-gray-500 dark:text-gray-100 {% endif %}">
                                     <a data-action="click->advert#toggleLike"  data-numlikes="numlikes_{{advert.id}}" class="flex items-center" href="{{path("advert_like_toggle", {'id': advert.id, 'csrf': csrf_token('togglelike' ~ advert.id) })}}">
-                                        <span id="numlikes_{{advert.id}}" class="flex">{{advert.likes}}</span>
+                                        <span class="no-pointer-event" id="numlikes_{{advert.id}}">{{advert.likes}}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="w-1/3 flex items-center text-md text-gray-500 dark:text-gray-200">
-                                    <span>{{advert.unlikes}}</span>
+                                <div class="w-1/3 flex items-center text-md {% if advert.userDisLiked(app.user) %} text-deep-orange-600 {% else %}text-gray-500 dark:text-gray-100 {% endif %}">
+                                    <a data-action="click->advert#toggleDislike"  data-numdislikes="numdislikes_{{advert.id}}" class="flex items-center" href="{{path("advert_dislike_toggle", {'id': advert.id, 'csrf': csrf_token('toggledislike' ~ advert.id) })}}">
+                                    <span class="no-pointer-event" id="numdislikes_{{advert.id}}">{{advert.unlikes}}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
                                     </svg>
+                                </a>
                                 </div>
                             </div>
                             {% if advert.category.name == "sell" %}

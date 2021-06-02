@@ -150,4 +150,23 @@ class AdvertController extends AbstractController
 
         return $this->json(['removed' => $removed]);
     }
+
+    #[Route('/toggle/dislike/{id}/{csrf}', name: 'advert_dislike_toggle', methods: ['GET'])]
+    public function toggleDislike(Advert $advert, $csrf): Response
+    {
+        $user = $this->getUser();
+        $removed = false;
+        if ($this->isCsrfTokenValid('toggledislike'.$advert->getId(), $csrf)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            if ($advert->userDisliked($user)) {
+                $advert->removeUserDislike($user);
+                $removed = true;
+            } else {
+                $advert->addUserDislike($user);
+            }
+            $entityManager->flush();
+        }
+
+        return $this->json(['removed' => $removed]);
+    }
 }

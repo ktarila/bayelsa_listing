@@ -15,9 +15,17 @@ export default class extends Controller {
     //     this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/store_controller.js';
     // }
     catch_click() {
-        // console.log('clicked me')
-        // console.log(this.element.getAttribute("data-href"))
-        window.location = this.element.getAttribute('data-href');
+        let tagname = event.target.tagName;
+        if (tagname === "DIV")
+        {
+            let parent = event.target.parentNode;
+            let url = parent.dataset.href;
+            if (url !== undefined)
+            {
+                window.location = url;
+            }
+        }        
+        
     }
 
     catch_logout() {
@@ -97,7 +105,7 @@ export default class extends Controller {
                     var containsTag = child.querySelectorAll('.has-tag');
                     for (var i = containsTag.length - 1; i >= 0; i--) {
                         let text = containsTag[i].innerHTML;
-                        containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
+                        containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="z-30 hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
                     }
 
                 }
@@ -162,7 +170,7 @@ export default class extends Controller {
                 var containsTag = child.querySelectorAll('.has-tag');
                 for (var i = containsTag.length - 1; i >= 0; i--) {
                     let text = containsTag[i].innerHTML;
-                    containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
+                    containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="z-30 hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
                 }
                 document.getElementById('advert-container').appendChild(child);
             }
@@ -181,11 +189,9 @@ export default class extends Controller {
 
     toggleLike(e) {
         event.preventDefault(e);
-        console.log('toggle like');
         let url = event.target.href;
         let element = event.target;
         let parent = event.target.parentNode;
-        console.log(url);
         fetch(url).then(function(response) {
             // The API call was successful!
             return response.text();
@@ -198,6 +204,41 @@ export default class extends Controller {
 
             // increment numlikes
             let span_likes = document.getElementById(element.dataset.numlikes);
+
+            let num_likes = parseInt(span_likes.innerHTML);
+            if (resp.removed && num_likes > 0) {
+                span_likes.innerHTML = num_likes - 1;
+            }
+
+            if (!resp.removed) {
+                span_likes.innerHTML = num_likes + 1;
+            }
+
+
+        }).catch(function(err) {
+            // There was an error
+            console.warn('Something went wrong.', err);
+        });
+
+    }
+
+    toggleDislike(e) {
+        event.preventDefault(e);
+        let url = event.target.href;
+        let element = event.target;
+        let parent = event.target.parentNode;
+        fetch(url).then(function(response) {
+            // The API call was successful!
+            return response.text();
+        }).then(function(body) {
+
+            let resp = JSON.parse(body);
+            parent.classList.toggle('text-deep-orange-600');
+            parent.classList.toggle('text-gray-500');
+            parent.classList.toggle('dark:text-gray-100');
+
+            // increment numlikes
+            let span_likes = document.getElementById(element.dataset.numdislikes);
 
             let num_likes = parseInt(span_likes.innerHTML);
             if (resp.removed && num_likes > 0) {
