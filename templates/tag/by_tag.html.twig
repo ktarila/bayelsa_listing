@@ -11,12 +11,12 @@
         <div id="advert-container" class="w-full">
             {% for advert in adverts %}
             {% include 'advert/advert_card.html.twig' %}
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
-<div class="hidden lg:block right w-full md:w-1/5 mt-5 md:mt-2 ">
-    {% include 'tag/tags.html.twig' %}
-</div>
+    <div class="hidden lg:block right w-full md:w-1/5 mt-5 md:mt-2 ">
+        {% include 'tag/tags.html.twig' %}
+    </div>
 </div>
 <div id='myModalEmail' class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 z-30 left-0 flex items-center justify-center inset-0 overflow-y-auto">
     {# <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div> #}

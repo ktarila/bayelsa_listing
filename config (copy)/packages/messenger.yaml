@@ -1,0 +1,18 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        failure_transport: failed
+
+        transports:
+            failed: 'doctrine://default?queue_name=failed'
+            async_priority_high: "%env(MESSENGER_TRANSPORT_DSN)%?queue_name=high_priority"
+            async_normal:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    queue_name: normal_priority
+
+        routing:
+            # Route your messages to the transports
+            'App\Message\CreateTags': async_normal
+            'App\Message\UpdateAdvertCommentCount': async_normal
+            # 'Symfony\Component\Mailer\Messenger\SendEmailMessage':  async_priority_high
