@@ -7,6 +7,39 @@ export default class extends Controller {
 
     }
 
+    replace_comment() {
+        let link = event.target;
+        event.preventDefault();
+        if (event.target.tagName !== 'A') {
+            link = event.target.parentNode;
+        }
+        if (link.tagName === 'A') {
+            let comment_id = link.dataset.comment_id;
+            console.log(comment_id);
+            let url = link.href;
+            console.log(url);
+            fetch(url).then(function(response) {
+                // The API call was successful!
+                return response.text();
+            }).then(function(html) {
+
+                // Convert the HTML string into a document object
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(html, 'text/html');
+                // replace loadmore button
+                let reply_comment = doc.getElementById(comment_id);
+                document.getElementById(comment_id).innerHTML = reply_comment.innerHTML;
+
+            }).catch(function(err) {
+                // There was an error
+                console.warn('Something went wrong.', err);
+            });
+
+        } else {
+            console.log("something went wrong");
+        }
+    }
+
     catch_parent() {
         // Add search value parameter to form and redirect
         event.preventDefault();
@@ -38,7 +71,7 @@ export default class extends Controller {
                 commentContainer.insertBefore(singleComment, commentContainer.firstChild);
 
                 // clear text area
-                document.getElementById('comment_content').value="";
+                document.getElementById('comment_content').value = "";
 
 
             }).catch(function(err) {
@@ -48,7 +81,7 @@ export default class extends Controller {
     }
 
     nextPage(e) {
-      let url = e.target.href;
+        let url = e.target.href;
         fetch(url).then(function(response) {
             // The API call was successful!
             return response.text();
@@ -70,7 +103,7 @@ export default class extends Controller {
             // There was an error
             console.warn('Something went wrong.', err);
         });
-        event.preventDefault(e); 
+        event.preventDefault(e);
     }
 
 }
