@@ -7,7 +7,7 @@
             {{ include('advert/single_ad.html.twig', {advert: comment.advert}) }}
         </div>
         <div id="parent-container">
-            <div class="single-comment flex w-full flex-wrap bg-white dark:bg-gray-800 dark:text-white shadow-xs border dark:border-gray-700 p-3 mb-1">
+            <div id="comment_{{comment.id}}" class="single-comment flex w-full flex-wrap bg-white dark:bg-gray-800 dark:text-white shadow-xs border dark:border-gray-700 p-3 mb-1">
                 <div class="meta block mb-2">
                     <span class="w-full text-sm font-medium">{{comment.user.fullname}} - </span>
                     <span class="w-full text-sm font-light italic">{{comment.createdAt|ago_date}}</span>
