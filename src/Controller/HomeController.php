@@ -43,7 +43,6 @@ class HomeController extends AbstractController
         if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
             $form_data = json_decode($request->getContent(), true);
         }
-
         $queryBuilder = $this->advertRepository->advancedFilter($form_data);
 
         $pagination = $this->paginator->paginate(

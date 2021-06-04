@@ -34,10 +34,21 @@ export default class extends Controller {
         window.location = '/logout';
     }
 
+    get_order_by(){
+        let orderBy = document.getElementById('order-by');
+        return orderBy.value;
+    }
+
+    orderChanged(){
+        console.log('change order');
+        this.catch_search();
+    }
+
     get_search_data() {
         let search_string = document.getElementById('searchtext').value;
         let json_data = this.getFormDataAsJson();
         json_data['search_value'] = search_string;
+        json_data['order_by'] = this.get_order_by();
 
         return json_data;
 

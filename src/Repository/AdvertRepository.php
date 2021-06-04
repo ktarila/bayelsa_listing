@@ -58,7 +58,14 @@ class AdvertRepository extends ServiceEntityRepository
             $qb->setParameter('state', $state);
         }
 
-        $qb->orderBy('d.createdAt', 'DESC');
+        // order query
+        if (isset($parameterArray['order_by']) && '' !== $parameterArray['order_by']) {
+            match ($parameterArray['order_by']) {
+                'likes' => $qb->orderBy('d.likes', 'DESC'),
+                'most-recent' => $qb->orderBy('d.createdAt', 'DESC'),
+                default => $qb,
+            };
+        }
 
         return $qb;
     }
