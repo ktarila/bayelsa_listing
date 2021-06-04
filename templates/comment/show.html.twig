@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{comment.advert}} Comment{% endblock %}
 {% block body %}
-<div class="content flex flex-wrap justify-between">
+<div data-controller="comment" class="content flex flex-wrap justify-between">
     <div class="left md:w-3/4 w-full my-2 rounded-t">
         <div class="advert">
             {{ include('advert/single_ad.html.twig', {advert: comment.advert}) }}
@@ -30,7 +30,7 @@
                 </div>
                 {% if app.user and replyForm is not null %}
                 <div class="reply-box w-full mt-1 py-5">
-                    {{ form_start(replyForm, {'attr': {'action': path('comment_show', {'id': comment.id}) }}) }}
+                    {{ form_start(replyForm, {'attr': { 'data-action':'submit->comment#submit_reply',   'action': path('comment_show', {'id': comment.id}) }}) }}
                     {{ form_widget(replyForm.content, {'attr': {'class': 'mt-1 w-full text-lg py-1 px-2 border rounded bg-gray-50 border-gray-300 dark:border-gray-700 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700', 'placeholder': 'reply', 'rows': 2}}) }}
                     {{ form_widget(replyForm) }}
                     <div class="flex justify-end">

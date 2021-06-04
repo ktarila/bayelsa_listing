@@ -42,49 +42,20 @@ export default class extends Controller {
 
     submit_reply(){
         event.preventDefault();
-        let el = event.target;
-        const data = new URLSearchParams();
-        for (const pair of new FormData(el)) {
-            data.append(pair[0], pair[1]);
-        }
-        let url = el.action;
-        fetch(url, {
-                method: 'POST',
-                body: data,
-            })
-            .then(function(response) {
-                // The API call was successful!
-
-                return response.text();
-            })
-            .then(function(html) {
-                // Convert the HTML string into a document object
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(html, 'text/html');
-
-                let singleComment = doc.getElementById("parent-container");
-                let commentContainer = document.getElementById('comments-container');
-                commentContainer.insertBefore(singleComment, commentContainer.firstChild);
-
-                // clear text area
-                el.reset();
-
-
-            }).catch(function(err) {
-                // There was an error
-                console.warn('Something went wrong.', err);
-            });
+        console.log("submit reply");
     }
 
     catch_parent() {
         // Add search value parameter to form and redirect
         event.preventDefault();
         let el = event.target;
+        console.log(el);
         const data = new URLSearchParams();
         for (const pair of new FormData(el)) {
             data.append(pair[0], pair[1]);
         }
         let url = window.location.href;
+        console.log(data.toString());
         // Display the values
         fetch(url, {
                 method: 'POST',
@@ -105,7 +76,7 @@ export default class extends Controller {
                 commentContainer.insertBefore(singleComment, commentContainer.firstChild);
 
                 // clear text area
-                el.reset();
+                document.getElementById('comment_content').value = "";
 
 
             }).catch(function(err) {
