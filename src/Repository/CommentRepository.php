@@ -33,7 +33,6 @@ class CommentRepository extends ServiceEntityRepository
             ->leftJoin('c.user', 'u')
             ->addSelect('u')
             ->andWhere('c.advert = :advert_id')
-            ->andWhere('c.parent is null')
             ->setParameter('advert_id', $advert->getId())
             ->orderBy('c.createdAt', 'DESC')
         ;

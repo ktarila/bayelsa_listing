@@ -47,11 +47,32 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'comment_show', methods: ['GET'])]
-    public function show(Comment $comment): Response
+    #[Route('/{id}', name: 'comment_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Comment $comment): Response
     {
+        $formView = null;
+        if ($this->isGranted('ROLE_USER')) {
+            $replyComment = new Comment();
+            $replyComment->setUser($this->getUser())
+                ->setParent($comment)
+                ->setAdvert($comment->getAdvert())
+                    ;
+            $form = $this->createForm(CommentType::class, $replyComment);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($replyComment);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('comment_show', ['id' => $replyComment->getId()]);
+            }
+            $formView = $form->createView();
+        }
+
         return $this->render('comment/show.html.twig', [
             'comment' => $comment,
+            'replyForm' => $formView,
         ]);
     }
 
@@ -76,12 +97,13 @@ class CommentController extends AbstractController
     #[Route('/{id}', name: 'comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment): Response
     {
+        $advert = $comment->getAdvert();
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('comment_index');
+        return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
     }
 }
