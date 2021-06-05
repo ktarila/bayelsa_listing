@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upload index{% endblock %}
+
+{% block body %}
+    <h1>Upload index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ImageName</th>
+                <th>ImageSize</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for upload in uploads %}
+            <tr>
+                <td>{{ upload.id }}</td>
+                <td>{{ upload.imageName }}</td>
+                <td>{{ upload.imageSize }}</td>
+                <td>{{ upload.updatedAt ? upload.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('upload_show', {'id': upload.id}) }}">show</a>
+                    <a href="{{ path('upload_edit', {'id': upload.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('upload_new') }}">Create new</a>
+{% endblock %}

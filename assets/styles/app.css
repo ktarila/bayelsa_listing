@@ -4,6 +4,8 @@
 
 @import "tailwindcss/utilities";
 
+@import "dropzone/dist/min/dropzone.min.css";
+
 label.required:after {
     content: "*";
 }
@@ -27,5 +29,18 @@ a object{
 
 .fixed-container {
     position: sticky;
+}
+
+/* dropzone styles */
+.dropzone {
+  @apply border-2 rounded-lg border-gray-400 border-dashed;
+
+  &.dz-drag-hover {
+    @apply border-2 rounded-lg border-gray-200 border-dashed;
+
+    .dz-message {
+      opacity: 0.9;
+    }
+  }
 }
 

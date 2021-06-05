@@ -13,6 +13,7 @@ use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
@@ -131,12 +132,27 @@ class Advert
      */
     private $userDislikes = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Upload::class, mappedBy="advert")
+     */
+    private $photos;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     */
+    private $uploadToken;
+
     public function __construct()
     {
         $now = new \DateTime();
         $this->createdAt = $now;
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->photos = new ArrayCollection();
+
+        // init upload token
+        $ulid = new Ulid();
+        $this->uploadToken = $ulid->toBase58();
     }
 
     public function getId(): ?int
@@ -510,6 +526,48 @@ class Advert
     {
         $this->likes = \count($this->getUserLikes());
         $this->unlikes = \count($this->getUserDislikes());
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Upload[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Upload $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Upload $photo): self
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getAdvert() === $this) {
+                $photo->setAdvert(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUploadToken(): ?string
+    {
+        return $this->uploadToken;
+    }
+
+    public function setUploadToken(?string $uploadToken): self
+    {
+        $this->uploadToken = $uploadToken;
 
         return $this;
     }

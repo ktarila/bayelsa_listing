@@ -11,6 +11,7 @@ namespace App\Form;
 
 use App\Entity\Advert;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,7 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('title', null, [
                 'help' => 'title of advert',
             ])
@@ -32,6 +34,12 @@ class AdvertType extends AbstractType
             ->add('state')
             ->add('category')
             ->add('lga')
+            ->add('photo', FileType::class, [
+                'attr' => ['data-mydropzone-target' => 'input'],
+                'mapped' => false,
+                'multiple' => true,
+                'label' => 'Advert Images',
+            ])
         ;
     }
 

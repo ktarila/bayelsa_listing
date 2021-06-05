@@ -21,3 +21,9 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+#ignore uploaded files
+/public/images/uploads/*
+
+# exception to the rule
+!/public/images/uploads/.gitkeep

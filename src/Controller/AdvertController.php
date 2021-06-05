@@ -105,6 +105,8 @@ class AdvertController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photo = $form['photo']->getData();
+            dump($photo);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
