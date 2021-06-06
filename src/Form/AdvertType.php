@@ -15,19 +15,33 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class AdvertType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = $this->security->getUser();
+        if (null === $user) {
+            $builder->add('fullname')
+                ->add('phone')
+                ->add('email')
+        ;
+        }
+
         $builder
 
             ->add('title', null, [
                 'help' => 'title of advert',
             ])
-            ->add('fullname')
-            ->add('phone')
-            ->add('email')
+
             ->add('description', TextareaType::class, [
                 'attr' => ['rows' => 6, 'placeholder' => 'Enter advert description'],
             ])

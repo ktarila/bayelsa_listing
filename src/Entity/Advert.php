@@ -571,4 +571,15 @@ class Advert
 
         return $this;
     }
+
+    public function getRandomPhoto(): ?Upload
+    {
+        $items = $this->photos->getValues();
+
+        if (0 === \count($items)) {
+            return null;
+        }
+
+        return $items[array_rand($items)];
+    }
 }

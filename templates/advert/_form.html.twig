@@ -1,5 +1,6 @@
 {{ form_start(form) }}
 <div>
+    {% if advert.user is  null %}
     <h3 class="tracking-wide font-semibold text-2xl my-3 text-gray-800 dark:text-white">Personal Info </h3>
     <div class="grid grid-cols-6 gap-4 mb-7">
         <div class="col-span-6">
@@ -12,6 +13,7 @@
             {{ form_row(form.phone) }}
         </div>
     </div>
+{% endif %}
     <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-white">Advert Info </h3>
     <div class="grid-cols-1 gap-4 mb-7">
         <div class="col-span-1 mb-2">

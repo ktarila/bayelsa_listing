@@ -31,6 +31,8 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('d');
         $qb->leftJoin('d.category', 'c')
+            ->leftJoin('d.photos', 'p')
+            ->addSelect('p')
             ->addSelect('c')
         ;
 

@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/advert')]
 class AdvertController extends AbstractController
@@ -28,18 +29,29 @@ class AdvertController extends AbstractController
     private $commentRepository;
     private $paginator;
     private $helpers;
+    private $security;
 
-    public function __construct(Helpers $helpers, CommentRepository $commentRepository, PaginatorInterface $paginator)
+    public function __construct(Security $security, Helpers $helpers, CommentRepository $commentRepository, PaginatorInterface $paginator)
     {
         $this->commentRepository = $commentRepository;
         $this->paginator = $paginator;
         $this->helpers = $helpers;
+        $this->security = $security;
     }
 
     #[Route('/new', name: 'advert_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $advert = new Advert();
+        $user = $this->getUser();
+        if (null !== $user) {
+            $advert->setFullname($user->getFullname())
+                ->setPhone($user->getPhone())
+                ->setEmail($user->getEmail())
+                ->setUser($user)
+            ;
+        }
+
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
 
@@ -101,6 +113,18 @@ class AdvertController extends AbstractController
     #[Route('/{id}/edit', name: 'advert_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Advert $advert): Response
     {
+        if (!$this->isGranted('edit', $advert)) {
+            $msg = "Please login with {$advert->getEmail()} to edit.";
+            $this->addFlash('errorMsg', $msg);
+
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+        }
+
+        if (null === $advert->getUser()) {
+            $advert->setUser($this->getUser());
+        }
+        // ensure always updated so images will be attached
+        $advert->setUpdatedAt();
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
 
