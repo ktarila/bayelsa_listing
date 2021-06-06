@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus';
-const serialize = require('form-serialize');
+import SimpleLightbox from "simplelightbox";
+
 
 /*
  * This is an example Stimulus controller!
@@ -11,21 +12,24 @@ const serialize = require('form-serialize');
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    // connect() {
-    //     this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/store_controller.js';
-    // }
+    connect() {
+        this.initLightBox();
+    }
+
+    initLightBox()
+    {
+        let lightbox = new SimpleLightbox('.gallery a');
+    }
     catch_click() {
         let tagname = event.target.tagName;
-        if (tagname === "DIV")
-        {
+        if (tagname === "DIV") {
             let parent = event.target.parentNode;
             let url = parent.dataset.href;
-            if (url !== undefined)
-            {
+            if (url !== undefined) {
                 window.location = url;
             }
-        }        
-        
+        }
+
     }
 
     catch_logout() {
@@ -34,12 +38,12 @@ export default class extends Controller {
         window.location = '/logout';
     }
 
-    get_order_by(){
+    get_order_by() {
         let orderBy = document.getElementById('order-by');
         return orderBy.value;
     }
 
-    orderChanged(){
+    orderChanged() {
         console.log('change order');
         this.catch_search();
     }

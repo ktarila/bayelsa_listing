@@ -33,6 +33,7 @@
         "postcss": "^7",
         "postcss-loader": "^5.0.0",
         "purgecss-webpack-plugin": "^4.0.2",
+        "simplelightbox": "^2.7.2",
         "stimulus-use": "^0.23.0",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     }

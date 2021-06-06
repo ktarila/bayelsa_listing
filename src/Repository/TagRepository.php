@@ -33,7 +33,7 @@ class TagRepository extends ServiceEntityRepository
     public function findRandomTags()
     {
         return $this->createQueryBuilder('t')
-            ->setMaxResults(20)
+            ->setMaxResults(15)
             ->getQuery()
             ->getResult()
         ;

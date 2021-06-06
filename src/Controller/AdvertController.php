@@ -39,6 +39,15 @@ class AdvertController extends AbstractController
         $this->security = $security;
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    #[Route('/login/check/{advert}', name: 'redirect_advert_show', methods: ['GET'])]
+    public function adRedirect(Request $request, Advert $advert): Response
+    {
+        return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+    }
+
     #[Route('/new', name: 'advert_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {

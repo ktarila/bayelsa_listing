@@ -5,6 +5,7 @@
 @import "tailwindcss/utilities";
 
 @import "dropzone/dist/min/dropzone.min.css";
+@import "simplelightbox/dist/simple-lightbox.min.css";
 
 label.required:after {
     content: "*";

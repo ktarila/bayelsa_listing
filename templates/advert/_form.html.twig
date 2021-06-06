@@ -35,21 +35,12 @@
             {{ form_row(form.lga) }}
         </div>
     </div>
-    {# <div id="dropzone" data-mydropzone-target="drop" class="border drop-zone w-full flex flex-wrap" >
-        <div class="w-full">
-            {{ form_row(form.photo)}}
-        </div>
-        <div class="mt-1 p-5 dropzone-msg dz-message needsclick w-full flex items-center flex-wrap">
-            <h3 class="dropzone-msg-title w-full text-center">Click or Drop file for upload.</h3>
-            <span class="dropzone-msg-desc h-20 w-full text-center">Max 5 MiB.</span>
-        </div>
-    </div> #}
     <div class="mb-6">
      {{ form_label(form.photo)}}
-    <div class="dropzone dropzone-default dz-clickable" data-controller="mydropzone" data-mydropzone-target="drop" data-dropurl="{{ path('dropzone_upload', {'upload_token': advert.uploadToken})}}">
+    <div class="dropzone dropzone-default dz-clickable dark:bg-gray-700" data-controller="mydropzone" data-mydropzone-target="drop" data-dropurl="{{ path('dropzone_upload', {'upload_token': advert.uploadToken})}}">
         {{ form_widget(form.photo) }}
       {# {{ form_widget(form.photo, {attr: { 'data-mydropzone-target': 'drop' } }) }} #}
-    <div class="dropzone-msg dz-message needsclick text-gray-600">
+    <div class="dropzone-msg dz-message needsclick text-gray-600 dark:text-white">
       <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
       <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
       </div>

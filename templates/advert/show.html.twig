@@ -18,7 +18,7 @@
             </div>
             {% else %}
             <div class="w-full flex justify-end my-1">
-                <a class="rounded font-semibold bg-deep-orange-700 hover:bg-deep-orange-600 text-white px-2 py-1 text-white" href="{{ path('app_login')}}">Login to comment</a>
+                <a class="rounded font-semibold bg-deep-orange-700 hover:bg-deep-orange-600 text-white px-2 py-1 text-white" href="{{ path('redirect_advert_show', {'advert': advert.id}) }}">Login to comment</a>
             </div>
             {% endif %}
             <div id="comments-container">
