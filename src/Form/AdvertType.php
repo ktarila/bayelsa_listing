@@ -36,10 +36,14 @@ class AdvertType extends AbstractType
             ->add('lga')
             ->add('photo', FileType::class, [
                 'attr' => ['data-mydropzone-target' => 'input'],
+                'required' => false,
                 'mapped' => false,
                 'multiple' => true,
                 'label' => 'Advert Images',
             ])
+            ->add('uploadToken', null, [
+                'label' => false,
+                'attr' => ['class' => 'hidden'], ])
         ;
     }
 

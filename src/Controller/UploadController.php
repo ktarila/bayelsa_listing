@@ -10,7 +10,7 @@
 namespace App\Controller;
 
 use App\Entity\Upload;
-use App\Form\UploadType;
+use App\Repository\UploadRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,65 +35,22 @@ class UploadController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->json(['id' => $upload->getId()]);
+        return $this->json(['id' => $upload->getId(), 'token' => $upload->getUploadToken()]);
     }
 
-    #[Route('/new', name: 'upload_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/remove', name: 'upload_delete', methods: ['DELETE'])]
+    public function delete(Request $request, UploadRepository $uploadRepository): Response
     {
-        $upload = new Upload();
-        $form = $this->createForm(UploadType::class, $upload);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($upload);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('upload_index');
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $upload = $uploadRepository->findOneByFields($data);
+            if (null !== $upload) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($upload);
+                $entityManager->flush();
+            }
         }
 
-        return $this->render('upload/new.html.twig', [
-            'upload' => $upload,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'upload_show', methods: ['GET'])]
-    public function show(Upload $upload): Response
-    {
-        return $this->render('upload/show.html.twig', [
-            'upload' => $upload,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'upload_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Upload $upload): Response
-    {
-        $form = $this->createForm(UploadType::class, $upload);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('upload_index');
-        }
-
-        return $this->render('upload/edit.html.twig', [
-            'upload' => $upload,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'upload_delete', methods: ['POST'])]
-    public function delete(Request $request, Upload $upload): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$upload->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($upload);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('upload_index');
+        return $this->json(['msg' => 'removed']);
     }
 }
