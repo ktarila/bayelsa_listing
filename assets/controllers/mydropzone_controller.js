@@ -22,6 +22,7 @@ export default class extends Controller {
             addRemoveLinks: true,
             maxFilesize: 1, // MB
             autoProcessQueue: true,
+            acceptedFiles: 'image/*',
             success: function(file, response) {
                 file._removeLink.href = "/upload/remove";
                 file._removeLink.setAttribute('data-id', response.id);

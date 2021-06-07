@@ -142,6 +142,11 @@ class Advert
      */
     private $uploadToken;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
     public function __construct()
     {
         $now = new \DateTime();
@@ -581,5 +586,17 @@ class Advert
         }
 
         return $items[array_rand($items)];
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }

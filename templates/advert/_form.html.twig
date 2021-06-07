@@ -28,6 +28,9 @@
     </div>
     <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-white">Address</h3>
     <div class="grid grid-cols-6 gap-4 mb-3">
+        <div class="col-span-6 mb-2">
+            {{ form_row(form.address) }}
+        </div>
         <div class="col-span-3 mb-2">
             {{ form_row(form.state) }}
         </div>

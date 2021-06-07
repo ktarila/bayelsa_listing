@@ -12,6 +12,7 @@ namespace App\Entity;
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -30,6 +31,11 @@ class Upload
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
+     * @Assert\File(
+     *     maxSize = "1024K",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid Image less than 1MB"
+     * )
      * @Vich\UploadableField(mapping="uploads", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null

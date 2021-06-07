@@ -45,6 +45,7 @@ class AdvertType extends AbstractType
             ->add('description', TextareaType::class, [
                 'attr' => ['rows' => 6, 'placeholder' => 'Enter advert description'],
             ])
+            ->add('address', null, ['label' => 'Street'])
             ->add('state')
             ->add('category')
             ->add('lga')
