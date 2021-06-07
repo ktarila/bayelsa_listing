@@ -133,7 +133,7 @@ class Advert
     private $userDislikes = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Upload::class, mappedBy="advert")
+     * @ORM\OneToMany(targetEntity=Upload::class, mappedBy="advert", cascade={"remove"})
      */
     private $photos;
 

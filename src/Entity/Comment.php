@@ -28,7 +28,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Advert::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $advert;
 
@@ -40,6 +40,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
 

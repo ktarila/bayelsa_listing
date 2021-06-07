@@ -150,13 +150,21 @@ class AdvertController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'advert_delete', methods: ['POST'])]
+    #[Route('/{id}/remove', name: 'advert_delete', methods: ['POST'])]
     public function delete(Request $request, Advert $advert): Response
     {
+        if (!$this->isGranted('edit', $advert)) {
+            $msg = "Please login with {$advert->getEmail()} to remove advert.";
+            $this->addFlash('errorMsg', $msg);
+
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$advert->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($advert);
             $entityManager->flush();
+            $this->addFlash('infoMsg', 'advert removed');
         }
 
         return $this->redirectToRoute('home');
