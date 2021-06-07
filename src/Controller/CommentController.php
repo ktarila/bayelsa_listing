@@ -94,7 +94,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'comment_delete', methods: ['POST'])]
+    #[Route('/{id}/remove', name: 'comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment): Response
     {
         $advert = $comment->getAdvert();
