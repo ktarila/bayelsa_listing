@@ -45,6 +45,9 @@
                     {{ form_end(replyForm) }}
                 </div>
                 {% endif %}
+                <div class="flex justify-end w-full">
+                {{ include('comment/_delete_form.html.twig')}}
+            </div>
             </div>
         </div>
     </div>

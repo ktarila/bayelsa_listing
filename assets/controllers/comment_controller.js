@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss'
 
 export default class extends Controller {
     connect() {
@@ -15,9 +16,7 @@ export default class extends Controller {
         }
         if (link.tagName === 'A') {
             let comment_id = link.dataset.comment_id;
-            console.log(comment_id);
             let url = link.href;
-            console.log(url);
             fetch(url).then(function(response) {
                 // The API call was successful!
                 return response.text();
@@ -40,7 +39,51 @@ export default class extends Controller {
         }
     }
 
-    submit_reply(){
+    delete_comment() {
+        event.preventDefault();
+        let form = event.target;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Are you sure you want to permanently delete this comment!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+            customClass: {
+                popup: 'dark:bg-gray-800 dark:text-white',
+                header: 'dark:text-white',
+                title: 'dark:text-white',
+                content: 'dark:text-white',
+                confirmButton: 'bg-deep-orange-900',
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const data = new URLSearchParams();
+                for (const pair of new FormData(form)) {
+                    data.append(pair[0], pair[1]);
+                }
+                let url = form.action;
+                // Display the values
+                fetch(url, {
+                        method: 'POST',
+                        body: data,
+                    })
+                    .then(function(response) {
+                        // The API call was successful!
+                        let comment_box = document.getElementById(form.dataset.commentbox);
+                        comment_box.classList.add("hidden");
+                    })
+                    .catch(function(err) {
+                        // There was an error
+                        console.warn('Something went wrong.', err);
+                    });
+
+            }
+        });
+    }
+
+    submit_reply() {
         event.preventDefault();
         let el = event.target;
         const data = new URLSearchParams();

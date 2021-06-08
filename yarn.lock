@@ -940,6 +940,11 @@
   resolved "https://registry.yarnpkg.com/@stimulus/webpack-helpers/-/webpack-helpers-2.0.0.tgz#54296d2a2dffd4f962d2e802d99a3fdd84b8845f"
   integrity sha512-D6tJWsAC024MwGEIKlUVYU8Ln87mlrmiwHvYAjipg+s8H4eLxUMQ3PZkWyPevfipH+oR3leuHsjYsK1gN5ViQA==
 
+"@sweetalert2/themes@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@sweetalert2/themes/-/themes-5.0.0.tgz#45d81bb5c56fd8b6ce2b4a0df2a07e0dff38a7bd"
+  integrity sha512-WsCTJLN/94xYVpuhbZIIvFYsiIONc1zh/E8UquMLZZhwRSARycUtidSeTp/oUCUh/coeAfSvQpAjnfU7Vx5RLA==
+
 "@symfony/stimulus-bridge@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-2.1.0.tgz#d5cf8c29847fd42f40a8a6464e057a1def05ced9"
@@ -5791,6 +5796,11 @@ svgo@^2.3.0:
     css-tree "^1.1.2"
     csso "^4.2.0"
     stable "^0.1.8"
+
+sweetalert2@^11.0.16:
+  version "11.0.16"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.0.16.tgz#48b3b0420cb2431b906f627d54884f5c7a88d434"
+  integrity sha512-9XStCZJMQpLQBAT/jr/4qZuA5Xwoupi/x5FagZYM1qGnyRqYecaJTPD1Cb5gc7G+9B5muH/JaDaBQGrvLpCmvQ==
 
 syntax-error@^1.1.1:
   version "1.4.0"
