@@ -1,0 +1,15 @@
+{% extends 'base_security.html.twig' %}
+{% block title %}404{% endblock %}
+{% block body %}
+<div class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+    <h2 class="text-center text-4xl text-blue-700 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold dark:text-white">404</h2>
+    <div class="my-12" >
+        
+       <p class="text-xl leading-relaxed tracking-wide font-medium text-gray-900 dark:text-white">Page not found.</p>
+
+       <p class="mt-5 text-xl leading-relaxed tracking-wide font-medium text-gray-900 dark:text-white"> The resource you are looking for is not available.</p>
+    </div>
+
+    <a href="{{ path('home')}}" class="hover:bg-blue-800 uppercase px-3 py-2 bg-blue-600 text-white font-semibold text-xl rounded">Back to home</a>
+</div>
+{% endblock %}

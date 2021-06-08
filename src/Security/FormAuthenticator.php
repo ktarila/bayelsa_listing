@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
@@ -111,6 +112,10 @@ class FormAuthenticator extends AbstractLoginFormAuthenticator implements Authen
         $user = $userRepository->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
             throw new UserNotFoundException();
+        }
+
+        if (!$user->getActive()) {
+            throw new CustomUserMessageAuthenticationException('Your account has been deactivated. Contact Admin  info@buyersandsellers.ng');
         }
 
         return new Passport(
