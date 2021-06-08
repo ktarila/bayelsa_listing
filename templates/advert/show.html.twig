@@ -50,8 +50,10 @@
                             </svg>
                             <span>reply</span>
                         </a>
+                        {% if is_granted('delete', comment) %}
 
                         {{ include('comment/_delete_form.html.twig')}}
+                    {% endif %}
                     </div>
                 </div>
                 {% endfor %}

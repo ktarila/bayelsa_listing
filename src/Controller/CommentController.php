@@ -76,28 +76,17 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'comment_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Comment $comment): Response
-    {
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('comment_index');
-        }
-
-        return $this->render('comment/edit.html.twig', [
-            'comment' => $comment,
-            'form' => $form->createView(),
-        ]);
-    }
-
     #[Route('/{id}/remove', name: 'comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment): Response
     {
         $advert = $comment->getAdvert();
+        if (!$this->isGranted('delete', $comment)) {
+            $msg = 'You are not allowed to delete this comment.';
+            $this->addFlash('errorMsg', $msg);
+
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);

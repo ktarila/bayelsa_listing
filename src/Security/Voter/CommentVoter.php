@@ -9,15 +9,15 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Advert;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class AdvertVoter extends Voter
+class CommentVoter extends Voter
 {
-    const EDIT = 'edit';
+    const DELETE = 'delete';
 
     private $security;
 
@@ -30,8 +30,8 @@ class AdvertVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return \in_array($attribute, [self::EDIT], true)
-            && $subject instanceof Advert;
+        return \in_array($attribute, [self::DELETE], true)
+            && $subject instanceof Comment;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
@@ -43,17 +43,17 @@ class AdvertVoter extends Voter
         }
 
         $perm = match ($attribute) {
-            self::EDIT => $this->canEdit($attribute, $subject),
+            self::DELETE => $this->canDelete($attribute, $subject),
             default => false,
         };
 
         return $perm;
     }
 
-    private function canEdit(string $attribute, Advert $advert): bool
+    private function canDelete(string $attribute, Comment $comment): bool
     {
         $user = $this->security->getUser();
 
-        return $user->getId() === $advert->getUser()?->getId() || $user->getEmail() === $advert->getEmail();
+        return $user->getId() === $comment->getUser()->getId();
     }
 }
