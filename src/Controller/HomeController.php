@@ -174,4 +174,11 @@ class HomeController extends AbstractController
             'hasItems' => \count($this->helpers->iterable_to_array($pagination->getItems())) === $this->getParameter('page_limit'),
         ]);
     }
+
+    #[Route('/tags', name: 'tags', methods: ['GET'])]
+    public function listTags(): Response
+    {
+        return $this->render('tag/tag_index.html.twig', [
+        ]);
+    }
 }
