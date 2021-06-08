@@ -15,4 +15,4 @@ framework:
             # Route your messages to the transports
             'App\Message\CreateTags': async_normal
             'App\Message\UpdateAdvertCommentCount': async_normal
-            # 'Symfony\Component\Mailer\Messenger\SendEmailMessage':  async_priority_high
+            'Symfony\Component\Mailer\Messenger\SendEmailMessage':  async_priority_high
