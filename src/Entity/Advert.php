@@ -40,7 +40,7 @@ class Advert
     private $fullname;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=false)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $phone;
 

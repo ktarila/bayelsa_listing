@@ -30,13 +30,14 @@ class AdvertType extends AbstractType
     {
         $user = $this->security->getUser();
         if (null === $user) {
-            $builder->add('fullname')
-                ->add('phone')
+            $builder->add('fullname', null, ['label' => 'Name'])
+
                 ->add('email')
         ;
         }
 
         $builder
+            ->add('phone')
 
             ->add('title', null, [
                 'help' => 'title of advert',
