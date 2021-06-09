@@ -25,5 +25,8 @@ yarn-error.log
 #ignore uploaded files
 /public/images/uploads/*
 
+#ignore built service worker
+/public/sw.js
+
 # exception to the rule
 !/public/images/uploads/.gitkeep
