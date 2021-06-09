@@ -1,3 +1,81 @@
-<div class="sl-wrapper simple-lightbox" tabindex="-1" role="dialog" aria-hidden="false"><button class="sl-close" style="display: block;">×</button><div class="sl-navigation" style="display: block;"><button class="sl-prev" style="display: block;">‹</button><button class="sl-next" style="display: block;">›</button></div><div class="sl-spinner" style="display: none;"><div></div></div><div class="sl-counter" style="display: block;"><span class="sl-current">2</span>/<span class="sl-total">2</span></div><div class="sl-image" style="top: 185px; left: 755.5px; width: 165px; height: 171px; transform: translateX(0px); transition: transform 0.25s linear 0s; display: block;"><img src="" data-scale="1" data-translate-x="0" data-translate-y="0" style="display: block; transform: translate(0px, 0px) scale(1);"></div></div>
-
+<div class="sl-wrapper simple-lightbox" tabindex="-1" role="dialog" aria-hidden="false"><button class="sl-close" style="display: block;">×</button>
+    <div class="sl-navigation" style="display: block;"><button class="sl-prev" style="display: block;">‹</button><button class="sl-next" style="display: block;">›</button></div>
+    <div class="sl-spinner" style="display: none;">
+        <div></div>
+    </div>
+    <div class="sl-counter" style="display: block;"><span class="sl-current">2</span>/<span class="sl-total">2</span></div>
+    <div class="sl-image" style="top: 185px; left: 755.5px; width: 165px; height: 171px; transform: translateX(0px); transition: transform 0.25s linear 0s; display: block;"><img src="" data-scale="1" data-translate-x="0" data-translate-y="0" style="display: block; transform: translate(0px, 0px) scale(1);"></div>
+</div>
 <div class="sl-overlay" data-opacity-target=".7" style="display: block;"></div>
+<div>
+    <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-white">Advert Info </h3>
+    <div class="grid-cols-1 gap-4 mb-7">
+        <div class="col-span-1 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed required" for="advert_category">Category</label><select id="advert_category" name="advert[category]" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700">
+                    <option value="1">I have (for sale)</option>
+                    <option value="2">I provide (services)</option>
+                    <option value="3">I need (product or services)</option>
+                </select></div>
+        </div>
+        <div class="col-span-1 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed required" for="advert_title">Title</label><input type="text" id="advert_title" name="advert[title]" required="required" maxlength="255" aria-describedby="advert_title_help" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700">
+                <p id="advert_title_help" class="mt-1 text-gray-600 text-sm italic dark:text-gray-100 help-text">title of advert</p>
+            </div>
+        </div>
+        <div class="col-span-1 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed required" for="advert_description">Description</label><textarea id="advert_description" name="advert[description]" required="required" rows="6" placeholder="Enter advert description" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700"></textarea></div>
+        </div>
+    </div>
+    <h3 class="tracking-wide font-semibold text-2xl my-1 text-gray-800 dark:text-white">Address</h3>
+    <div class="grid grid-cols-6 gap-4 mb-3">
+        <div class="col-span-6 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed" for="advert_address">Street</label><input type="text" id="advert_address" name="advert[address]" maxlength="255" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700"></div>
+        </div>
+        <div class="col-span-3 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed required" for="advert_state">State</label><select id="advert_state" name="advert[state]" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700">
+                    <option value="1">Bayelsa</option>
+                </select></div>
+        </div>
+        <div class="col-span-3 mb-2">
+            <div><label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed required" for="advert_lga">Lga</label><select id="advert_lga" name="advert[lga]" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700">
+                    <option value="1">Yenagoa</option>
+                </select></div>
+        </div>
+    </div>
+    <div class="mb-6">
+        <label class="text-sm font-medium text-gray-700 dark:text-gray-100 tracking-wide leading-relaxed" for="advert_photo">Advert Images</label>
+        <div class="dropzone dropzone-default dz-clickable dark:bg-gray-700 dz-started" data-controller="mydropzone" data-mydropzone-target="drop" data-dropurl="/upload/ajax/upload/1BaGef8946mizsfKVp9AeL">
+            <input type="file" id="advert_photo" name="advert[photo][]" data-mydropzone-target="input" multiple="multiple" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700 hidden">
+            <div class="dropzone-msg dz-message needsclick text-gray-600 dark:text-white">
+                <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
+                <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
+            </div>
+            <div class="dz-preview dz-processing dz-image-preview dz-complete">
+                <div class="dz-image"><img data-dz-thumbnail="" alt="web-development-768x436.jpg"></div>
+                <div class="dz-details">
+                    <div class="dz-size"><span data-dz-size=""><strong>40</strong> KB</span></div>
+                    <div class="dz-filename"><span data-dz-name="">web-development-768x436.jpg</span></div>
+                </div>
+                <div class="dz-progress"> <span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span> </div>
+                <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+                <div class="dz-success-mark"> <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>Check</title>
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF"></path>
+                        </g>
+                    </svg> </div>
+                <div class="dz-error-mark"> <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>Error</title>
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                                <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"></path>
+                            </g>
+                        </g>
+                    </svg> </div> <a class="dz-remove" href="/upload/remove" data-dz-remove="" data-id="61" data-token="1BaGef8946mizsfKVp9AeL">Remove file</a>
+            </div>
+        </div>
+    </div>
+    <div id="advert" class="space-y-6">
+        <div><input type="text" id="advert_uploadToken" name="advert[uploadToken]" required="required" maxlength="255" class="hidden" value="1BaGef8946mizsfKVp9AeL"></div><input type="hidden" id="advert__token" name="advert[_token]" class="mt-1 w-full text-lg py-1 px-2 border-0 border-b-2 shadow-xs bg-gray-50 border-gray-300 focus:border-deep-orange-500 focus:ring-0 focus:outline-none focus:border-2 dark:bg-gray-700" value="7b5e1aa6ea04874b6334d9e90f93b.vIWNOUKBl9jF4jxirFy2JhGCYTgSjWUM3tu2wqAwDRg.2Pa0Vyj23661tG862wrPE2LaKVZI1AJKu6r_icN4Vy3Ozs5JO83cnvS6bQ">
+    </div>
+</div>
