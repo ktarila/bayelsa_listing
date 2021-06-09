@@ -53,4 +53,24 @@ class UploadController extends AbstractController
 
         return $this->json(['msg' => 'removed']);
     }
+
+    #[Route('/remove/{id}', name: 'upload_remove', methods: ['POST'])]
+    public function remove(Request $request, Upload $upload): Response
+    {
+        $advert = $upload->getAdvert();
+        if (!$this->isGranted('edit', $advert)) {
+            $msg = 'You are not allowed to delete this ad.';
+            $this->addFlash('errorMsg', $msg);
+
+            return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+        }
+
+        if ($this->isCsrfTokenValid('delete'.$upload->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($upload);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
+    }
 }

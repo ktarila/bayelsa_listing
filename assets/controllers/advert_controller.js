@@ -16,8 +16,7 @@ export default class extends Controller {
         this.initLightBox();
     }
 
-    initLightBox()
-    {
+    initLightBox() {
         let lightbox = new SimpleLightbox('.gallery a');
     }
     catch_click() {
@@ -270,6 +269,30 @@ export default class extends Controller {
             console.warn('Something went wrong.', err);
         });
 
+    }
+
+    delete_upload() {
+        event.preventDefault();
+        let form = event.target;
+        const data = new URLSearchParams();
+        for (const pair of new FormData(form)) {
+            data.append(pair[0], pair[1]);
+        }
+        let url = form.action;
+        // Display the values
+        fetch(url, {
+                method: 'POST',
+                body: data,
+            })
+            .then(function(response) {
+                // The API call was successful!
+                let upload_box = document.getElementById(form.dataset.uploadbox);
+                upload_box.classList.add("hidden");
+            })
+            .catch(function(err) {
+                // There was an error
+                console.warn('Something went wrong.', err);
+            });
     }
 
 }
