@@ -20,7 +20,9 @@ export default class extends Controller {
             paramName: 'file',
             url: dropurl,
             addRemoveLinks: true,
-            maxFilesize: 1, // MB
+            resizeWidth: 300,
+            resizeMimeType: 'image/jpeg',
+            maxFilesize: 3, // MB
             autoProcessQueue: true,
             acceptedFiles: 'image/*',
             success: function(file, response) {
