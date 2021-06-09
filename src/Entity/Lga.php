@@ -39,7 +39,7 @@ class Lga
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $active = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=State::class, inversedBy="lgas")

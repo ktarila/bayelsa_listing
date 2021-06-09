@@ -39,7 +39,7 @@ class State
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $active = true;
 
     /**
      * @ORM\OneToMany(targetEntity=Lga::class, mappedBy="state")
