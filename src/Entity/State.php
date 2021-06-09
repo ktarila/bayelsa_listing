@@ -41,9 +41,15 @@ class State
      */
     private $active;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Lga::class, mappedBy="state")
+     */
+    private $lgas;
+
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
+        $this->lgas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,5 +114,35 @@ class State
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|Lga[]
+     */
+    public function getLgas(): Collection
+    {
+        return $this->lgas;
+    }
+
+    public function addLga(Lga $lga): self
+    {
+        if (!$this->lgas->contains($lga)) {
+            $this->lgas[] = $lga;
+            $lga->setState($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLga(Lga $lga): self
+    {
+        if ($this->lgas->removeElement($lga)) {
+            // set the owning side to null (unless already changed)
+            if ($lga->getState() === $this) {
+                $lga->setState(null);
+            }
+        }
+
+        return $this;
     }
 }

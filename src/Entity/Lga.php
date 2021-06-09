@@ -41,6 +41,12 @@ class Lga
      */
     private $active;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=State::class, inversedBy="lgas")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $state;
+
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
@@ -108,5 +114,17 @@ class Lga
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }
