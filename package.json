@@ -37,6 +37,7 @@
         "simplelightbox": "^2.7.2",
         "stimulus-use": "^0.23.0",
         "sweetalert2": "^11.0.16",
-        "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+        "workbox-webpack-plugin": "^6.1.5"
     }
 }
