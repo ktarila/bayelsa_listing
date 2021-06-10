@@ -100,9 +100,11 @@
     </div>
     <div data-controller="advert" class="gallery flex flex-wrap p-5 w-full">
         {% for upload in advert.photos %}
-        <a href="{{ vich_uploader_asset(upload) }}" class="mr-3 w-1/3 lg:w-1/6">
+        <div class="w-1/3 lg:w-1/6">
+        <a href="{{ vich_uploader_asset(upload) }}" class="p-1 block">
             <img src="{{ vich_uploader_asset(upload) }}" class="w-full" />
         </a>
+    </div>
         {% endfor %}
     </div>
 </div>
