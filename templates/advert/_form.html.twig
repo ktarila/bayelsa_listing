@@ -1,18 +1,17 @@
 {{ form_start(form) }}
 <div>
-    
     <h3 class="tracking-wide font-semibold text-2xl my-3 text-gray-800 dark:text-white">Personal Info </h3>
     <div class="grid grid-cols-6 gap-4 mb-7">
         {% if form.fullname is defined %}
         <div class="col-span-6">
             {{ form_row(form.fullname) }}
         </div>
-    {% endif %}
-    {% if form.email is defined %}
+        {% endif %}
+        {% if form.email is defined %}
         <div class="col-span-3">
             {{ form_row(form.email) }}
         </div>
-    {% endif %}
+        {% endif %}
         {% if form.phone is defined %}
         <div class="col-span-3">
             {{ form_row(form.phone) }}
@@ -43,6 +42,7 @@
             {{ form_row(form.lga) }}
         </div>
     </div>
+    {% if advert.uploadToken is not null %}
     <div class="mb-6">
         {{ form_label(form.photo)}}
         <div class="dropzone dropzone-default dz-clickable dark:bg-gray-700" data-controller="mydropzone" data-mydropzone-target="drop" data-dropurl="{{ path('dropzone_upload', {'upload_token': advert.uploadToken})}}">
@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+{% endif %}
     {{ form_widget(form) }}
 </div>
 <div class="px-4 py-3 text-right sm:px-6">
@@ -78,3 +79,40 @@
         {% endfor %}
     </div>
 </div>
+<script>
+let state = document.getElementById('advert_state');
+var uploadToken = document.querySelector('#advert__token');
+state.addEventListener("change", function() {
+    // ... retrieve the corresponding form.
+    var form = this.closest('form');
+    // Simulate form data, but only include the selected sport value.
+    // Creating the XMLHttpRequest object
+    var request = new XMLHttpRequest();
+    formData = new FormData();
+    formData.append(state.getAttribute("name"), state.value);
+    // add csrf token
+    formData.append(uploadToken.getAttribute("name"), uploadToken.value);
+
+
+    // Instantiating the request object
+    request.open(form.getAttribute("method"), window.location.href);
+    // add xml request
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // Defining event listener for readystatechange event
+    request.onreadystatechange = function() {
+        // Check if the request is compete and was successful
+        if (this.readyState === 4) {
+            // Inserting the response from server into an HTML element
+            var el = document.createElement('html');
+            el.innerHTML = this.responseText;
+            var tagname = el.querySelector('#advert_lga');
+            document.querySelector("#advert_lga").innerHTML = tagname.innerHTML;
+        }
+    };
+
+    // Sending the request to the server
+    request.send(formData);
+
+});
+</script>
