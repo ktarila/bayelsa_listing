@@ -67,8 +67,6 @@ class AdvertRepository extends ServiceEntityRepository
                 'most-recent' => $qb->orderBy('d.createdAt', 'DESC'),
                 default => $qb->orderBy('RAND()'),
             };
-        } else {
-            $qb->orderBy('RAND()');
         }
 
         return $qb;
