@@ -46,3 +46,20 @@ a object{
   }
 }
 
+.sl-overlay {
+    background: #000;
+    bottom: 0;
+    display: none;
+    opacity: .95;
+    right: 0;
+    z-index: 1035;
+}
+
+.sl-wrapper .sl-navigation button {
+    color: #9a9191;
+}
+
+.sl-wrapper .sl-close, .sl-wrapper .sl-counter {
+    color: #9a9191;
+}
+
