@@ -81,7 +81,6 @@
 </div>
 <script>
 let state = document.getElementById('advert_state');
-var uploadToken = document.querySelector('#advert__token');
 state.addEventListener("change", function() {
     // ... retrieve the corresponding form.
     var form = this.closest('form');
@@ -90,9 +89,6 @@ state.addEventListener("change", function() {
     var request = new XMLHttpRequest();
     formData = new FormData();
     formData.append(state.getAttribute("name"), state.value);
-    // add csrf token
-    formData.append(uploadToken.getAttribute("name"), uploadToken.value);
-
 
     // Instantiating the request object
     request.open(form.getAttribute("method"), window.location.href);

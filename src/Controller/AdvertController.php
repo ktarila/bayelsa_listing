@@ -62,6 +62,7 @@ class AdvertController extends AbstractController
         }
 
         $form = $this->createForm(AdvertType::class, $advert);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && !$request->isXmlHttpRequest()) {
@@ -129,6 +130,16 @@ class AdvertController extends AbstractController
             return $this->redirectToRoute('advert_show', ['id' => $advert->getId()]);
         }
 
+        if ($request->isXmlHttpRequest()) {
+            $form = $this->createForm(AdvertType::class, new Advert());
+            $form->handleRequest($request);
+
+            return $this->render('advert/edit.html.twig', [
+                'advert' => $advert,
+                'form' => $form->createView(),
+            ]);
+        }
+
         if (null === $advert->getUser()) {
             $advert->setUser($this->getUser());
         }
@@ -137,7 +148,7 @@ class AdvertController extends AbstractController
         $form = $this->createForm(AdvertType::class, $advert);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && !$request->isXmlHttpRequest()) {
             // $photo = $form['photo']->getData();
             $this->getDoctrine()->getManager()->flush();
 
