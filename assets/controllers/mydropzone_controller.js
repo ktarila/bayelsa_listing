@@ -20,7 +20,7 @@ export default class extends Controller {
             paramName: 'file',
             url: dropurl,
             addRemoveLinks: true,
-            resizeWidth: 300,
+            resizeWidth: 500,
             resizeMimeType: 'image/jpeg',
             maxFilesize: 3, // MB
             autoProcessQueue: true,

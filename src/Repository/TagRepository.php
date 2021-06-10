@@ -34,6 +34,7 @@ class TagRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->setMaxResults(15)
+            ->orderBy('RAND()')
             ->getQuery()
             ->getResult()
         ;
