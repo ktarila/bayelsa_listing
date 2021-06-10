@@ -65,7 +65,7 @@ class AdvertRepository extends ServiceEntityRepository
             match ($parameterArray['order_by']) {
                 'likes' => $qb->orderBy('d.likes', 'DESC'),
                 'most-recent' => $qb->orderBy('d.createdAt', 'DESC'),
-                default => $qb,
+                default => $qb->orderBy('RAND()'),
             };
         }
 
