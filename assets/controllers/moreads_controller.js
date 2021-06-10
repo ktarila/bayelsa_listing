@@ -27,8 +27,8 @@ export default class extends Controller {
                     let text = containsTag[i].innerHTML;
                     containsTag[i].innerHTML = text.replace(/#(\w+)/g, '<a class="hover:text-deep-orange-600 text-blue-500 dark:text-blue-400" href="/tag/$1">#$1</a>');;
                 }
-                document.getElementById('advert-container').appendChild(child);
             }
+            document.getElementById('advert-container').appendChild(ad_container);
             // replace loadmore button
             let load_more = doc.getElementById('paginate-container');
             document.getElementById('paginate-container').innerHTML = load_more.innerHTML;
