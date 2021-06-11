@@ -1,11 +1,11 @@
 <div class="bg-white dark:bg-gray-900 dark:text-white w-full rounded shadow flex flex-wrap card text-gray-900 mr-3 mb-2">
     <div class="w-full md:w-1/5">
-        <a href="{{path('advert_show', {'id': advert.id})}}">
+        <a href="{{path('advert_show', {'id': advert.id})}}" style="max-height: 400px; display:block; overflow:hidden">
             {% set upload = advert.getRandomPhoto() %}
             {% if upload is null %}
             <img class="w-full p-3 h-62 md:h-52 rounded-l-sm" src="{{asset('images/feature.jpg')}}">
             {% else %}
-            <img class="w-full p-3 h-auto md:h-52 rounded-l-sm" src="{{ vich_uploader_asset(upload) }}" alt="{{ advert.title }}">
+            <img class="w-full p-3  md:h-52 rounded-l-sm" src="{{ vich_uploader_asset(upload) }}" alt="{{ advert.title }}">
             {% endif %}
         </a>
     </div>
