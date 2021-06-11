@@ -3,9 +3,9 @@
         <a href="{{path('advert_show', {'id': advert.id})}}">
             {% set upload = advert.getRandomPhoto() %}
             {% if upload is null %}
-            <img class="w-full p-3 h-64 md:h-52 rounded-l-sm" src="{{asset('images/feature.jpg')}}">
+            <img class="w-full p-3 h-62 md:h-52 rounded-l-sm" src="{{asset('images/feature.jpg')}}">
             {% else %}
-            <img class="w-full p-3 h-64 md:h-52 rounded-l-sm" src="{{ vich_uploader_asset(upload) }}" alt="{{ advert.title }}">
+            <img class="w-full p-3 h-auto md:h-52 rounded-l-sm" src="{{ vich_uploader_asset(upload) }}" alt="{{ advert.title }}">
             {% endif %}
         </a>
     </div>
