@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Category index{% endblock %}
+{% block body %}
+<div class="mb-10">
+    <div class="page-title search rounded bg-deep-orange-700 dark:bg-gray-700 shadow">
+        <h2 class="px-3 text-4xl text-white font-semibold tracking-wide leading-relaxed">Categories</h2>
+    </div>
+</div>
+<div class="container mx-auto text-white block" data-controller="category">
+    <div class=" grid grid-cols-3 lg:grid-cols-6 gap-4">
+        {% for category in categories %}
+        <div class="card mx-auto clickable w-full" data-href="{{path('category_show', {'id': category.id})}}">
+            <div class="card__body rounded-lg bg-gray-50 dark:bg-gray-900 shadow">
+                <div class="card__body-cover h-14 lg:h-32"><img class="card__body-cover-image" src="{{asset('images/logo.png')}}">
+                </div>
+                <header class="card__body-header mb-0 lg:mb-3">
+                    <h2 class="card__body-header-title text-gray-700 dark:text-gray-100">{{ category.name }}</h2>
+                    <p class="card__body-header-subtitle text-gray-600 dark:text-gray-200">Motorcycles</p>
+                </header>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

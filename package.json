@@ -23,12 +23,14 @@
         "@sweetalert2/themes": "^5.0.0",
         "@tailwindcss/forms": "^0.3.2",
         "@tailwindcss/postcss7-compat": "^2.0.3",
+        "add": "^2.0.6",
         "autoprefixer": "^9",
         "choices.js": "^9.0.1",
         "dropzone": "^5.9.2",
         "form-serialize": "^0.7.2",
         "glob-all": "^3.2.1",
         "lodash": "^4.17.21",
+        "masonry-layout": "^4.2.2",
         "path": "^0.12.7",
         "perfect-scrollbar": "^1.5.0",
         "postcss": "^7",
@@ -38,6 +40,7 @@
         "stimulus-use": "^0.23.0",
         "sweetalert2": "^11.0.16",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-        "workbox-webpack-plugin": "^6.1.5"
+        "workbox-webpack-plugin": "^6.1.5",
+        "yarn": "^1.22.10"
     }
 }

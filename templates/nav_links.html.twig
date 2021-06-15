@@ -43,6 +43,15 @@
         </a>
         
     </li>
+    <li class="flex w-full items-center n-link hover:bg-deep-orange-600 hover:text-gray-100 cursor-pointer">
+        <a href="{{ path("category_index")}}" class="p-3 flex items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+        </svg>
+        <span>Category</span>
+        </a>
+        
+    </li>
     {% if app.user %}
     <li class="border-t dark:border-gray-700 mt-20 hover:bg-deep-orange-600 hover:text-gray-100 cursor-pointer w-full">
         <a href="{{ path("app_logout")}}" class="p-3 flex items-center w-full">

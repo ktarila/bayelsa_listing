@@ -160,6 +160,23 @@ window.onclick = function(event) {
     }
 }
 
+        const clickables = document.querySelectorAll(".clickable");
+        for (const clickable of clickables) {
+            clickable.addEventListener('click', () => {
+                if (clickable.classList.contains('new-tab')) {
+                    // do some stuff
+                    window.open(
+                        clickable.getAttribute('data-href'),
+                        '_blank'
+                    );
+                } else {
+                    window.location = clickable.getAttribute('data-href');
+
+                }
+
+            });
+        }
+
 
 module.exports = {
     openPanel,

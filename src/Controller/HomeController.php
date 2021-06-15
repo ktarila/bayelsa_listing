@@ -32,7 +32,14 @@ class HomeController extends AbstractController
         $this->helpers = $helpers;
     }
 
-    #[Route('/', name: 'home', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'landing', methods: ['GET', 'POST'])]
+    public function landing(): Response
+    {
+        return $this->render('home/index.html.twig', [
+        ]);
+    }
+
+    #[Route('/home', name: 'home', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $form = $this->createForm(AdvertSearchType::class, null, []);

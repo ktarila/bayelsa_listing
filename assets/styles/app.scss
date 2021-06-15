@@ -63,3 +63,101 @@ a object{
     color: #9a9191;
 }
 
+// category card
+
+.card {
+  --background-image: #fff, #{rgba(#006baf, 0.2)};
+  --text-color: #666;
+  --text-headline: #000;
+  --card-shadow: #0082ff;
+  
+  --blend-mode: overlay;
+  --transition: 0.15s;
+  user-select: none;
+
+  &:nth-child(odd) {
+    .card__body-cover-image {
+      --x-y1: 100% 90%;
+      --x-y2: 67% 83%;
+      --x-y3: 33% 90%;
+      --x-y4: 0% 85%;
+    }
+  }
+
+  &:nth-child(even) {
+    .card__body-cover-image {
+      --x-y1: 100% 85%;
+      --x-y2: 73% 93%;
+      --x-y3: 25% 85%;
+      --x-y4: 0% 90%;
+    }
+  }
+
+
+  &__body {
+    display: grid;
+    grid-auto-rows: calc(var(--card-height) - var(--header-height)) auto;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    transform: scale(var(--scale, 1)) translateZ(0);
+    &:active {
+      --scale: 0.96;
+    }
+
+    &-cover {
+      --c-width: 100%;
+      --c-height: 100%;
+      position: relative;
+      overflow: hidden;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--c-width);
+        height: var(--c-height);
+        border-radius: var(--c-border);
+        // background: linear-gradient(to bottom right, var(--background-image));
+        // mix-blend-mode: var(--blend-mode);
+        // opacity: var(--opacity-bg, 1);
+        // transition: opacity var(--transition) linear;
+      }
+      &-image {
+        width: var(--c-width);
+        height: var(--c-height);
+        object-fit: cover;
+        border-radius: var(--c-border);
+        // filter: var(--filter-bg, grayscale(1));
+        // transition: filter var(--transition) linear; // not working properly in Chrome
+        clip-path: polygon(
+          0% 0%,
+          100% 0%,
+          var(--x-y1, 100% 90%),
+          var(--x-y2, 67% 83%),
+          var(--x-y3, 33% 90%),
+          var(--x-y4, 0% 85%)
+        );
+      }
+    }
+
+    &-header {
+      height: var(--header-height);
+      background: var(--background);
+      padding: 0 10px 10px 10px;
+      &-title {
+        color: var(--text-headline);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      &-subtitle {
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+

@@ -147,6 +147,11 @@ class Advert
      */
     private $address;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=AdType::class, inversedBy="adverts")
+     */
+    private $type;
+
     public function __construct()
     {
         $now = new \DateTime();
@@ -596,6 +601,18 @@ class Advert
     public function setAddress(?string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getType(): ?AdType
+    {
+        return $this->type;
+    }
+
+    public function setType(?AdType $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
