@@ -68,6 +68,7 @@
     {% endif %}
 </div>
 {{ form_end(form) }}
+{% if advert.photos|length > 0 %}
 <div class="mt-3">
     <h2 class="font-semibold text-xl mb-2">Uploaded Images</h2>
     <div class="w-full flex flex-wrap" data-controller="advert">
@@ -79,6 +80,7 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 <script>
 let state = document.getElementById('advert_state');
 state.addEventListener("change", function() {

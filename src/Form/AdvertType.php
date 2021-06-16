@@ -36,23 +36,37 @@ class AdvertType extends AbstractType
     {
         $user = $this->security->getUser();
         if (null === $user) {
-            $builder->add('fullname', null, ['label' => 'Name'])
+            $builder->add('fullname', null, [
+                'label' => false,
+                'attr' => ['placeholder' => 'Name*'],
+            ])
 
-                ->add('email')
+                ->add('email', null, [
+                    'label' => false,
+                    'attr' => ['placeholder' => 'Email*'],
+                ])
         ;
         }
 
         $builder
-            ->add('phone')
+            ->add('phone', null, [
+                'label' => false,
+                'attr' => ['placeholder' => 'Phone*'],
+            ])
 
             ->add('title', null, [
-                'help' => 'title of advert',
+                'label' => false,
+                'attr' => ['placeholder' => 'Title of advert'],
             ])
 
             ->add('description', TextareaType::class, [
+                'label' => false,
                 'attr' => ['rows' => 6, 'placeholder' => 'Enter advert description'],
             ])
-            ->add('address', null, ['label' => 'Street'])
+            ->add('address', null, [
+                'label' => false,
+                'attr' => ['placeholder' => 'Street Address'],
+            ])
             ->add('state', null, ['placeholder' => 'Choose State'])
             ->add('category')
             ->add('photo', FileType::class, [
