@@ -68,6 +68,7 @@ class AdvertType extends AbstractType
                 'attr' => ['placeholder' => 'Street Address'],
             ])
             ->add('state', null, ['placeholder' => 'Choose State'])
+            ->add('type', null, ['required' => true])
             ->add('category')
             ->add('photo', FileType::class, [
                 'attr' => ['data-mydropzone-target' => 'input'],
