@@ -1,25 +1,49 @@
 {% extends 'base.html.twig' %}
 {% block title %}Category index{% endblock %}
 {% block body %}
-<div class="mb-10">
-    <div class="page-title search rounded bg-deep-orange-700 dark:bg-gray-700 shadow">
-        <h2 class="px-3 text-4xl text-white font-semibold tracking-wide leading-relaxed">Categories</h2>
+<div data-controller="category">
+    <div class="mb-5">
+        <div class="page-title search rounded bg-deep-orange-700 dark:bg-gray-700 shadow">
+            <h2 class="px-3 text-4xl text-white font-semibold tracking-wide leading-relaxed">Categories</h2>
+        </div>
     </div>
-</div>
-<div class="container mx-auto text-white block" data-controller="category">
-    <div class=" grid grid-cols-3 lg:grid-cols-6 gap-4">
-        {% for category in categories %}
-        <div class="card mx-auto clickable w-full" data-href="{{path('category_show', {'id': category.id})}}">
-            <div class="card__body rounded-lg bg-gray-50 dark:bg-gray-900 shadow">
-                <div class="card__body-cover h-14 lg:h-32"><img class="card__body-cover-image" src="{{asset('images/logo.png')}}">
-                </div>
-                <header class="card__body-header mb-0 lg:mb-3">
-                    <h2 class="card__body-header-title text-gray-700 dark:text-gray-100">{{ category.name }}</h2>
-                    <p class="card__body-header-subtitle text-gray-600 dark:text-gray-200">Motorcycles</p>
-                </header>
+    <div>
+        <div class="search mb-5">
+            <div class="w-full pt-2 relative mx-auto">
+                <form name="advert_search" method="POST">
+                    <input data-category-target="searchtext" data-action="keyup->category#autofilter" id="searchtext" class="w-full border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 h-14 px-5 pr-16 rounded-lg focus:outline-none focus:ring-0 focus:border-deep-orange-400 dark:text-white text-lg dark:placeholder-gray-100" type="search" name="search" placeholder="Find categories" autocomplete="off">
+                    <button type="submit" class="absolute right-0 top-0 mt-5 mr-4" data-target="catch_search.submit">
+                        <svg class="text-gray-600 dark:text-white h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                            <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                        </svg>
+                    </button>
+                    <div class="w-full">
+                        <span class="text-gray-600 dark:text-gray-200 italic text-sm">filter categories ...</span>
+                    </div>
+                </form>
             </div>
         </div>
-        {% endfor %}
+    </div>
+    <div class="container mx-auto text-white block">
+        <div class=" grid grid-cols-3 lg:grid-cols-6 gap-4">
+            {% for category in categories %}
+            <div data-category-target="category" data-category="{{category.name}}" class="card mx-auto clickable w-full" data-href="{{path('category_show', {'id': category.id, 'slug': category.slug})}}">
+                <div class="card__body rounded-lg bg-gray-50 dark:bg-gray-900 shadow">
+                    <div class="card__body-cover h-14 lg:h-32">
+                        {% if category.image is null %}
+                        <img class="card__body-cover-image" src="{{asset('images/logo.png')}}">
+                        {% else %}
+                        <img src="{{ vich_uploader_asset(category) }}" class="card__body-cover-image" />
+                        {% endif %}
+                    </div>
+                    <header class="card__body-header mb-0 lg:mb-3">
+                        <h2 class="card__body-header-title text-gray-700 dark:text-gray-100">{{ category.name }}</h2>
+                        <p class="card__body-header-subtitle text-gray-600 dark:text-gray-200">Motorcycles</p>
+                    </header>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

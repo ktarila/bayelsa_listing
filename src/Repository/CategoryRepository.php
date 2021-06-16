@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of Bayelsa Listing Symfony Project.
+ *
+ * (c) Patrick Kenekayoro <Patrick.Kenekayoro@outlook.com>
+ * .
+ */
+
 namespace App\Repository;
 
 use App\Entity\Category;
@@ -17,6 +24,16 @@ class CategoryRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+    }
+
+    public function findRandomCategories()
+    {
+        return $this->createQueryBuilder('t')
+            ->setMaxResults(15)
+            ->orderBy('RAND()')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**

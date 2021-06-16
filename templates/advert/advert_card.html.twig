@@ -116,19 +116,10 @@
                         </a>
                     </div>
                 </div>
-                {% if advert.category.name == "sell" %}
-                <div class="bg-regal-blue uppercase flex items-center rounded px-2 leading-tight  text-xs text-white font-semibold">
-                    <span>Seller</span>
-                </div>
-                {% elseif advert.category.name == "buy" %}
-                <div class="bg-green-700 uppercase flex items-center rounded px-2 leading-tight  text-xs text-white font-semibold">
-                    <span>Buyer</span>
-                </div>
-                {% else %}
+                
                 <div class="bg-pink-700 uppercase flex items-center rounded px-2 leading-tight  text-xs text-white font-semibold">
-                    <span>Service</span>
+                    <span>{{advert.category.name}}</span>
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
