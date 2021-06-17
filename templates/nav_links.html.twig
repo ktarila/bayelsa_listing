@@ -77,11 +77,13 @@
         </svg>
         <span>FAQs</span>
     </li>
-    <li class="dark:border-gray-700 hover:bg-deep-orange-600 hover:text-gray-100 cursor-pointer w-full p-3 flex items-center">
+    <li class="n-link dark:border-gray-700 hover:bg-deep-orange-600 hover:text-gray-100 cursor-pointer w-full flex items-center">
+        <a href="{{ path("terms_of_service")}}" class="p-3 flex items-center w-full">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
         </svg>
         <span>Disclaimer</span>
+    </a>
     </li>
     {% if is_granted('ROLE_ADMIN') %}
     <li class="dark:border-gray-700 hover:bg-deep-orange-600 hover:text-gray-100 cursor-pointer w-full">

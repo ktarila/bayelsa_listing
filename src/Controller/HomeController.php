@@ -53,6 +53,13 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/terms-of-service', name: 'terms_of_service', methods: ['GET'])]
+    public function terms(): Response
+    {
+        return $this->render('home/terms_of_service.html.twig', [
+        ]);
+    }
+
     #[Route('/home', name: 'home', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
