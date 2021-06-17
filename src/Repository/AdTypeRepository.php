@@ -14,10 +14,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method AdvertType|null find($id, $lockMode = null, $lockVersion = null)
- * @method AdvertType|null findOneBy(array $criteria, array $orderBy = null)
- * @method AdvertType[]    findAll()
- * @method AdvertType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Advert|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Advert|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Advert[]    findAll()
+ * @method Advert[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class AdTypeRepository extends ServiceEntityRepository
 {
