@@ -56,7 +56,7 @@ class AdvertType extends AbstractType
 
             ->add('title', null, [
                 'label' => false,
-                'attr' => ['placeholder' => 'Title of advert'],
+                'attr' => ['placeholder' => 'Title of advert*'],
             ])
 
             ->add('description', TextareaType::class, [
@@ -67,9 +67,12 @@ class AdvertType extends AbstractType
                 'label' => false,
                 'attr' => ['placeholder' => 'Street Address'],
             ])
-            ->add('state', null, ['placeholder' => 'Choose State'])
-            ->add('type', null, ['required' => true])
-            ->add('category')
+            ->add('state', null, ['label' => false, 'placeholder' => 'Choose State'])
+            ->add('type', null, [
+                'label' => false,
+                'placeholder' => 'Choose advert type',
+                'required' => true, ])
+            ->add('category', null, ['label' => false, 'placeholder' => 'Advert category'])
             ->add('photo', FileType::class, [
                 'attr' => ['data-mydropzone-target' => 'input'],
                 'required' => false,
@@ -89,7 +92,8 @@ class AdvertType extends AbstractType
                 'class' => Lga::class,
                 'required' => true,
                 'choices' => $lgas,
-                'label' => 'City/Town',
+                'label' => false,
+                'placeholder' => 'City/Town',
             ]);
         };
 
