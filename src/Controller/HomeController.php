@@ -39,6 +39,13 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/privacy-policy', name: 'privacy_policy', methods: ['GET'])]
+    public function policy(): Response
+    {
+        return $this->render('home/privacy_policy.html.twig', [
+        ]);
+    }
+
     #[Route('/home', name: 'home', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
