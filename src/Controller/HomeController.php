@@ -46,6 +46,13 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/data-deletion', name: 'data_deletion', methods: ['GET'])]
+    public function data_deletion(): Response
+    {
+        return $this->render('home/data_deletion.html.twig', [
+        ]);
+    }
+
     #[Route('/home', name: 'home', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
