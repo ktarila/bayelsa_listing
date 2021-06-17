@@ -68,27 +68,7 @@ class FacebookAuthenticator extends OAuth2Authenticator
             ->fetchUserFromToken($credentials)
         ;
 
-        dump($facebookUserData);
-        /*
-  #data: array:8 [▼
-    "id" => "10225460359926622"
-    "name" => "Patrick Kenekayoro"
-    "first_name" => "Patrick"
-    "last_name" => "Kenekayoro"
-    "email" => "patrick.kenekayoro@outlook.com"
-    "picture" => array:1 [▼
-      "data" => array:2 [▼
-        "url" => "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10225460359926622&height=200&width=200&ext=1626509768&hash=AeTw6ptVwj1jPu5Vunk"
-        "is_silhouette" => false
-      ]
-    ]
-    "picture_url" => "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10225460359926622&height=200&width=200&ext=1626509768&hash=AeTw6ptVwj1jPu5Vunk"
-    "is_silhouette" => false
-  ]
-*/
-
         $facebookUser = $facebookUserData->toArray();
-        dump($facebookUser);
         $user = $this->em->getRepository(User::class)
             ->findFacebookUser($facebookUser['email'], $facebookUser['id'])
         ;
