@@ -76,6 +76,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $active = true;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookProfileUrl;
+
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
@@ -277,6 +287,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getFacebookId(): ?string
+    {
+        return $this->facebookId;
+    }
+
+    public function setFacebookId(?string $facebookId): self
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    public function getFacebookProfileUrl(): ?string
+    {
+        return $this->facebookProfileUrl;
+    }
+
+    public function setFacebookProfileUrl(?string $facebookProfileUrl): self
+    {
+        $this->facebookProfileUrl = $facebookProfileUrl;
 
         return $this;
     }

@@ -20,6 +20,7 @@ security:
             provider: app_user_provider
             custom_authenticators:
                 - App\Security\FormAuthenticator
+                - App\Security\FacebookAuthenticator
             entry_point: App\Security\FormAuthenticator
 
             logout:

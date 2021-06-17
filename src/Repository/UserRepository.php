@@ -43,6 +43,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function findFacebookUser(string $email, string $facebookId): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.email = :email OR u.facebookId = :facebookId')
+            ->setParameter('facebookId', $facebookId)
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
