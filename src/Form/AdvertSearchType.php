@@ -9,6 +9,7 @@
 
 namespace App\Form;
 
+use App\Entity\AdType;
 use App\Entity\Category;
 use App\Entity\State;
 use Doctrine\ORM\EntityRepository;
@@ -30,12 +31,13 @@ class AdvertSearchType extends AbstractType
                 'attr' => ['name' => 'state'],
             ])
             // ->add('lga')
-            ->add('category', EntityType::class, [
+            ->add('type', EntityType::class, [
                 'expanded' => true,
-                'multiple' => true,
-                'class' => Category::class,
+                'multiple' => false,
+                'class' => AdType::class,
+                'label' => 'Advert Type',
                 'query_builder' => function (EntityRepository $er) use ($options) {
-                    $category = $options['category'];
+                    $category = $options['adtype'];
                     if ('buy' === $category) {
                         return $er->createQueryBuilder('c')
                             ->andWhere('c.name = :buy')
@@ -56,6 +58,18 @@ class AdvertSearchType extends AbstractType
                     ;
                 },
                 'required' => false,
+                'attr' => ['name' => ''],
+            ])
+            ->add('category', EntityType::class, [
+                'expanded' => true,
+                'multiple' => true,
+                'class' => Category::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.id', 'ASC')
+                    ;
+                },
+                'required' => false,
                 'attr' => ['name' => 'category'],
             ])
         ;
@@ -64,6 +78,7 @@ class AdvertSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'adtype' => null,
             'category' => null,
         ]);
     }

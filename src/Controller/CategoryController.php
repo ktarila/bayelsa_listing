@@ -53,6 +53,7 @@ class CategoryController extends AbstractController
         if ($request->isMethod('post') && 0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
             $form_data = json_decode($request->getContent(), true);
         }
+
         $queryBuilder = $this->advertRepository->advancedFilter($form_data);
         $queryBuilder->andWhere('d.category = :cat_id')
             ->setParameter('cat_id', $category->getId())

@@ -10,6 +10,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\AdType;
+use App\Entity\Advert;
 use App\Entity\Category;
 use App\Entity\Lga;
 use App\Entity\State;
@@ -46,5 +47,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Category', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Ad Type', 'fas fa-list', AdType::class);
+        yield MenuItem::linkToCrud('Advert', 'fas fa-list', Advert::class);
     }
 }

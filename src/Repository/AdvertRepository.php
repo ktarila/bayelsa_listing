@@ -31,9 +31,11 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('d');
         $qb->leftJoin('d.category', 'c')
+            ->leftJoin('d.type', 't')
             ->leftJoin('d.photos', 'p')
             ->addSelect('p')
             ->addSelect('c')
+            ->addSelect('t')
         ;
 
         // category
@@ -43,6 +45,11 @@ class AdvertRepository extends ServiceEntityRepository
                 $qb->andWhere('d.category IN (:categories)');
                 $qb->setParameter('categories', $categories);
             }
+        }
+
+        if (isset($parameterArray['type'])) {
+            $qb->andWhere('d.type = :type');
+            $qb->setParameter('type', $parameterArray['type']);
         }
 
         // text search

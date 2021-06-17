@@ -113,7 +113,7 @@ class HomeController extends AbstractController
     #[Route('/buyers', name: 'buyers', methods: ['GET', 'POST'])]
     public function listBuyers(Request $request): Response
     {
-        $form = $this->createForm(AdvertSearchType::class, null, ['category' => 'buy']);
+        $form = $this->createForm(AdvertSearchType::class, null, ['adtype' => 'buy']);
 
         $page = $request->query->getInt('page', 1);
 
@@ -125,7 +125,7 @@ class HomeController extends AbstractController
         $queryBuilder = $this->advertRepository->advancedFilter($form_data);
 
         $queryBuilder
-            ->andWhere('c.name = :buy')
+            ->andWhere('t.name = :buy')
             ->setParameter('buy', 'buy')
         ;
 
@@ -161,8 +161,8 @@ class HomeController extends AbstractController
         $queryBuilder = $this->advertRepository->advancedFilter($form_data);
 
         $queryBuilder
-            ->andWhere('c.name != :buy')
-            ->setParameter('buy', 'buy')
+            ->andWhere('t.name = :sell')
+            ->setParameter('sell', 'sell')
         ;
 
         $pagination = $this->paginator->paginate(
